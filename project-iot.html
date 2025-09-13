@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>IoT Security Case Study | Elisha Gras</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+      :root{
+        --primary: #3B7B9A;  /* blockchain primary */
+        --accent:  #70AFCE;  /* blockchain accent */
+        --muted:   #6B7280;
+      }
+
+      /* Base */
+      body {
+        font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        background: #FFFFFF;
+        color: #0f172a;
+        -webkit-font-smoothing:antialiased;
+        -moz-osx-font-smoothing:grayscale;
+      }
+
+      h1,h2,h3 { font-family: 'Merriweather', Georgia, serif; color: var(--primary); }
+
+      /* Gradient title */
+      .gradient-title {
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Timeline reveal animation */
+      .timeline-item { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(.2,.9,.3,1); }
+      .timeline-item.show { opacity: 1; transform: translateY(0); }
+
+      /* Card style */
+      .card {
+        background: #FFFFFF;
+        border-radius: 1rem;
+        box-shadow: 0 8px 24px rgba(15,23,42,0.06);
+      }
+
+      /* Hover effects for images & video */
+      .hover-effect { transition: transform .28s ease, box-shadow .28s ease; border-radius: 1rem; }
+      .hover-effect:hover { transform: translateY(-6px) scale(1.03); box-shadow: 0 18px 40px rgba(16,24,40,0.12); }
+
+      /* Lightbox overlay */
+      .lb-overlay { background: rgba(2,6,23,0.8); }
+
+      /* Tables */
+      table td, table th { border-color: #E6EEF5; }
+      thead th { background: linear-gradient(180deg, rgba(112,175,206,0.06), rgba(112,175,206,0.02)); }
+
+      /* responsive padding */
+      main { padding-top: 2.5rem; padding-bottom: 3rem; }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- Header -->
+    <header class="bg-[var(--primary)] text-white p-6 shadow-lg">
+      <div class="max-w-6xl mx-auto flex items-center justify-between">
+        <h1 class="text-2xl font-serif font-bold">IoT Security: Demonstrating Attacks & Defenses</h1>
+        <a href="index.html" class="text-white/90 hover:text-[#A5DEF1]">← Back to Portfolio</a>
+      </div>
+    </header>
+
+    <!-- Main (open-flow single column) -->
+    <main class="max-w-6xl mx-auto p-6 space-y-10">
+
+      <!-- Hero -->
+      <section class="card p-8 text-center">
+        <h2 class="text-4xl font-bold mb-3 gradient-title">Case Study</h2>
+        <p class="text-lg text-slate-700 max-w-3xl mx-auto leading-relaxed">
+          A hands-on project that exposes common IoT vulnerabilities by simulating attacks in a controlled environment and evaluating practical defenses across device, network, and cloud layers.
+        </p>
+      </section>
+
+      <!-- Project details -->
+      <section class="card p-6">
+        <h2 class="text-2xl font-bold mb-4">Project Details</h2>
+        <ul class="text-slate-700 space-y-2">
+          <li><span class="font-semibold">Role:</span> Researcher & Developer</li>
+          <li><span class="font-semibold">Duration:</span> 6 months</li>
+          <li><span class="font-semibold">Team Size:</span> 4</li>
+          <li><span class="font-semibold">Tools & Tech:</span> Raspberry Pi, ESP8266, Arduino Emulator, ThingSpeak, Metasploit, Nmap</li>
+          <li><span class="font-semibold">Category:</span> Cybersecurity · IoT</li>
+        </ul>
+      </section>
+
+      <!-- Overview -->
+      <section class="timeline-item card p-6">
+        <h2 class="text-2xl font-bold mb-3 border-b pb-2" style="border-color: rgba(112,175,206,0.25)">Overview</h2>
+        <p class="text-slate-700 leading-relaxed">
+          IoT devices are proliferating quickly while many ship with weak default settings. This work demonstrates how attackers exploit defaults and misconfigurations (port scanning, brute-force, MITM, phishing), and evaluates mitigations such as secure defaults, segmentation, and patching practices.
+        </p>
+      </section>
+
+      <!-- Objectives -->
+      <section class="timeline-item card p-6">
+        <h2 class="text-2xl font-bold mb-3 border-b pb-2" style="border-color: rgba(112,175,206,0.25)">Objectives</h2>
+        <ul class="list-disc list-inside text-slate-700 space-y-1">
+          <li>Identify vulnerabilities at device, network, and cloud layers</li>
+          <li>Simulate real-world attack scenarios ethically in lab</li>
+          <li>Propose and validate practical countermeasures</li>
+        </ul>
+      </section>
+
+      <!-- System Architecture -->
+      <section class="timeline-item card p-6">
+        <h2 class="text-2xl font-bold mb-3 border-b pb-2" style="border-color: rgba(112,175,206,0.25)">System Architecture</h2>
+        <p class="text-slate-700 leading-relaxed">
+          The testbed used Raspberry Pi and ESP8266 microcontrollers connected to sensors and emulated services on ThingSpeak. Security testing used Nmap for discovery and Metasploit for certain exploit / credential testing; network flows were observed via packet captures.
+        </p>
+              <div class="mt-4 flex justify-center">
+                  <img src="assets/images/iot-architecture.png" 
+                    alt="IoT architecture diagram" 
+                    class="hover-effect rounded-lg shadow w-1/3 md:w-1/4 lg:w-1/5 object-contain" />
+              </div>
+      </section>
+
+      <!-- Attack scenarios -->
+      <section class="timeline-item card p-6">
+        <h2 class="text-2xl font-bold mb-4 border-b pb-2" style="border-color: rgba(112,175,206,0.25)">Attack Scenarios</h2>
+
+        <!-- Port Scanning -->
+        <article class="mb-6">
+          <h3 class="text-xl font-semibold mb-2">Port Scanning using Nmap</h3>
+          <p class="text-slate-700 mb-3">Nmap was used to discover open ports and services on IoT endpoints to identify accessible attack surface.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <img data-src="assets/images/nmap1.png" src="assets/images/nmap1.png" alt="Nmap Port Scan 1" class="hover-effect rounded-lg shadow lb-img" />
+            <img data-src="assets/images/nmap2.png" src="assets/images/nmap2.png" alt="Nmap Port Scan 2" class="hover-effect rounded-lg shadow lb-img" />
+          </div>
+        </article>
+
+        <!-- Brute Force -->
+        <article class="mb-6">
+          <h3 class="text-xl font-semibold mb-2">Brute Force Attack using Metasploit</h3>
+          <p class="text-slate-700 mb-3">Metasploit auxiliary modules were used to check for weak/default credentials on IoT devices.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <img src="assets/images/bruteforce1.png" alt="Brute Force 1" class="hover-effect rounded-lg shadow lb-img" />
+            <img src="assets/images/bruteforce2.png" alt="Brute Force 2" class="hover-effect rounded-lg shadow lb-img" />
+            <img src="assets/images/bruteforce3.png" alt="Brute Force 3" class="hover-effect rounded-lg shadow lb-img" />
+            <img src="assets/images/bruteforce4.png" alt="Brute Force 4" class="hover-effect rounded-lg shadow lb-img" />
+          </div>
+        </article>
+
+        <!-- Man-in-the-Middle -->
+        <article class="mb-6">
+          <h3 class="text-xl font-semibold mb-2">Man-in-the-Middle (MITM)</h3>
+          <p class="text-slate-700 mb-3">A controlled MITM scenario intercepted device-cloud communication to demonstrate data manipulation and exfiltration risks.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <img src="assets/images/mitm1.png" alt="MITM 1" class="hover-effect rounded-lg shadow lb-img" />
+            <img src="assets/images/mitm2.png" alt="MITM 2" class="hover-effect rounded-lg shadow lb-img" />
+          </div>
+        </article>
+
+        <!-- Phishing -->
+        <article class="mb-2">
+          <h3 class="text-xl font-semibold mb-2">Phishing Page</h3>
+          <p class="text-slate-700 mb-3">A demonstration phishing page illustrated how users may be socially engineered into disclosing credentials which can then be used against IoT management panels.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <img src="assets/images/phishing1.png" alt="Phishing Page 1" class="hover-effect rounded-lg shadow lb-img" />
+            <img src="assets/images/phishing2.png" alt="Phishing Page 2" class="hover-effect rounded-lg shadow lb-img" />
+          </div>
+        </article>
+      </section>
+
+      <!-- Lightbox modal (for images) -->
+      <div id="lbOverlay" class="hidden fixed inset-0 z-50 flex items-center justify-center lb-overlay">
+        <button id="lbClose" aria-label="close" class="absolute top-6 right-6 text-white text-3xl font-bold bg-black/30 px-3 py-1 rounded">&times;</button>
+        <img id="lbImg" src="" alt="expanded" class="max-w-[92%] max-h-[86%] rounded-lg shadow-lg" />
+      </div>
+
+      <!-- Results -->
+      <section class="timeline-item card p-6">
+        <h2 class="text-2xl font-bold mb-3 border-b pb-2" style="border-color: rgba(112,175,206,0.25)">Results</h2>
+        <p class="text-slate-700 leading-relaxed">
+          The experiments confirmed how quickly weak defaults and exposed services can be exploited. Demonstrated impacts included service disruption, credential compromise, and data interception. Proper mitigations significantly reduced observed risk in the testbed.
+        </p>
+      </section>
+
+      <!-- Learnings -->
+      <section class="timeline-item card p-6">
+        <h2 class="text-2xl font-bold mb-3 border-b pb-2" style="border-color: rgba(112,175,206,0.25)">Learnings</h2>
+        <ul class="list-disc list-inside text-slate-700 space-y-1">
+          <li>Secure defaults and enforced password policies drastically reduce exposure.</li>
+          <li>Regular firmware updates and vulnerability scanning are essential.</li>
+          <li>Network segmentation and monitoring limit lateral movement and reduce blast radius.</li>
+        </ul>
+      </section>
+
+      <!-- Next steps -->
+      <section class="timeline-item card p-6">
+        <h2 class="text-2xl font-bold mb-3 border-b pb-2" style="border-color: rgba(112,175,206,0.25)">Next Steps</h2>
+        <ul class="list-disc list-inside text-slate-700 space-y-1">
+          <li>Automate scheduled scanning and firmware update checks.</li>
+          <li>Build a hardened reference image for IoT devices with secure defaults.</li>
+          <li>Run larger-scale simulations to measure impact of segmentation approaches.</li>
+        </ul>
+      </section>
+
+      <!-- Tech stack -->
+      <section class="timeline-item card p-6">
+        <h2 class="text-2xl font-bold mb-3 border-b pb-2" style="border-color: rgba(112,175,206,0.25)">Tech Stack</h2>
+        <p class="text-slate-700">Raspberry Pi, ESP8266, Arduino emulator, ThingSpeak (emulation), Nmap, Metasploit, Wireshark / packet captures</p>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="p-6 text-center bg-[var(--primary)] text-[#A5DEF1]">
+      © 2025 Elisha Gras
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+      // timeline reveal
+      const items = document.querySelectorAll('.timeline-item');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('show');
+        });
+      }, { threshold: 0.12 });
+      items.forEach(item => observer.observe(item));
+
+      // simple lightbox
+      const lbImgs = Array.from(document.querySelectorAll('.lb-img'));
+      const overlay = document.getElementById('lbOverlay');
+      const lbImg = document.getElementById('lbImg');
+      const lbClose = document.getElementById('lbClose');
+
+      function openLB(src){
+        lbImg.src = src;
+        overlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeLB(){
+        overlay.classList.add('hidden');
+        lbImg.src = '';
+        document.body.style.overflow = '';
+      }
+
+      lbImgs.forEach(img => {
+        img.addEventListener('click', (e) => {
+          openLB(e.currentTarget.src || e.currentTarget.dataset.src);
+        });
+      });
+
+      lbClose.addEventListener('click', closeLB);
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeLB();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !overlay.classList.contains('hidden')) closeLB();
+      });
+    </script>
+  </body>
+</html>

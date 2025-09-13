@@ -1,0 +1,21 @@
+[
+  {
+    "title": "Melodease – Music Practice Tracking App",
+    "description":"A fun app designed to make music learning interactive with progress tracking, gamification, and personalized lessons. Built with Flutter & Firebase.",
+    "disclaimer": "This project was created for personal learning purposes.",
+    "image": "assets/images/melodease.png",
+    "link": "project-melodease.html"
+  },
+  {
+    "title": "Decentralized Framework for Content Creators",
+    "description": "Blockchain-based ecosystem that empowers creators with tokenized analytics, recommendation systems, and micro-economy engagement. Built with Solidity, React.js, and Truffle Suite.",
+    "image": "assets/images/daoproject.png",
+    "link": "project-blockchain.html"
+  },
+  {
+    "title": "Demonstration of IoT Attacks",
+    "description": "Security-focused project that showcased vulnerabilities in IoT devices using simulated attacks and preventive countermeasures. Tools: Wireshark, Nmap, Metasploit.",
+    "image": "assets/images/iot.jpg",
+    "link": "project-iot.html"
+  }
+]

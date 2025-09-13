@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elisha Gras | Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            deepBlue: '#3B7B9A',
+            midBlue: '#70AFCE',
+            lightBlue: '#B8D7E0',
+            white: '#FFFFFF',
+            grayLight: '#f5f5f5'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Merriweather', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @keyframes float-slow { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-20px) } }
+    @keyframes float-medium { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-15px) } }
+    @keyframes float-fast { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-10px) } }
+
+    .animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
+    .animate-float-medium { animation: float-medium 4.5s ease-in-out infinite; }
+    .animate-float-fast { animation: float-fast 3s ease-in-out infinite; }
+  </style>
+</head>
+<body class="bg-lightBlue text-deepBlue font-sans scroll-smooth relative">
+
+  <!-- Navigation -->
+  <header class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md shadow-md z-50">
+    <div class="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
+      <a href="#hero" class="text-2xl font-bold text-deepBlue font-serif">EG</a>
+      <nav class="hidden md:flex space-x-6">
+        <a href="#about" class="text-deepBlue font-medium hover:text-midBlue transition">About</a>
+        <a href="#experience" class="text-deepBlue font-medium hover:text-midBlue transition">Experience</a>
+        <a href="#projects" class="text-deepBlue font-medium hover:text-midBlue transition">Projects</a>
+        <a href="#leadership" class="text-deepBlue font-medium hover:text-midBlue transition">Leadership</a>
+        <a href="#contact" class="text-deepBlue font-medium hover:text-midBlue transition">Contact</a>
+      </nav>
+      <button id="menu-btn" class="md:hidden text-deepBlue">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden flex flex-col bg-white/95 shadow-md">
+      <a href="#about" class="p-4 border-b border-gray-200 text-deepBlue font-medium hover:bg-lightBlue transition">About</a>
+      <a href="#experience" class="p-4 border-b border-gray-200 text-deepBlue font-medium hover:bg-lightBlue transition">Experience</a>
+      <a href="#projects" class="p-4 border-b border-gray-200 text-deepBlue font-medium hover:bg-lightBlue transition">Projects</a>
+      <a href="#leadership" class="p-4 border-b border-gray-200 text-deepBlue font-medium hover:bg-lightBlue transition">Leadership</a>
+      <a href="#contact" class="p-4 text-deepBlue font-medium hover:bg-lightBlue transition">Contact</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="hero" class="min-h-screen flex flex-col justify-center items-center text-center bg-deepBlue text-white px-6 pt-28 sm:pt-32 relative overflow-hidden">
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute w-24 h-24 bg-midBlue/30 rounded-full animate-float-slow -top-10 -left-10"></div>
+      <div class="absolute w-32 h-32 bg-lightBlue/30 rounded-full animate-float-medium -bottom-10 -right-10"></div>
+      <div class="absolute w-16 h-16 bg-midBlue/40 rounded-full animate-float-fast top-1/2 left-10"></div>
+    </div>
+    <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold font-serif mb-6" data-aos="fade-down">Elisha Gras</h1>
+    <p class="text-xl sm:text-2xl md:text-3xl mb-10" id="typed-text"></p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="#projects" class="px-6 sm:px-8 py-3 bg-white text-deepBlue font-semibold rounded-md shadow-lg hover:shadow-xl hover:bg-midBlue hover:text-white transition transform hover:scale-105 hover:brightness-110">
+        View My Work
+      </a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="bg-white py-24 relative">
+    <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12 px-6">
+      <img src="assets/images/elcrop.png" alt="Elisha Gras" class="w-64 h-64 sm:w-72 sm:h-72 rounded-full object-cover shadow-2xl border-4 border-lightBlue" data-aos="fade-right">
+      <div data-aos="fade-left">
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold mb-6 text-deepBlue">About Me</h2>
+        <p class="text-base sm:text-lg text-deepBlue leading-relaxed">
+I am an Engineering Management graduate from <strong>Cornell University</strong> passionate about merging <strong>technology, creativity, and strategy</strong>. I founded E-Forte Music Academy, designing structured keyboard programs aligned with Trinity College London and mentoring 50+ students.
+
+As a QA Automation Engineer at Jio Platforms, I’ve led automation initiatives, streamlined testing, and implemented AI-powered solutions, delivering measurable impact. My projects span blockchain frameworks for content creators, IoT security simulations, and medical adherence apps, reflecting my drive to build innovative, real-world solutions.
+
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="py-24 bg-grayLight">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-4xl font-bold mb-16 text-center font-serif text-deepBlue" data-aos="fade-down">Experience</h2>
+      <div class="space-y-12">
+        <!-- E-Forte -->
+        <div data-aos="fade-up" class="bg-white p-6 rounded-2xl shadow-lg">
+          <h3 class="text-2xl font-semibold font-serif mb-2">Founder & Instructor</h3>
+          <p class="text-midBlue text-sm mb-2">E-Forte Music Academy, Mumbai — Jul 2023 – Jul 2025</p>
+          <ul class="list-disc list-inside text-deepBlue">
+            <li>Built a structured keyboard program aligned with Trinity College London</li>
+            <li>Mentored 50+ students with personalized lesson plans</li>
+            <li>Increased retention by 40% with interactive teaching methods</li>
+          </ul>
+        </div>
+        <!-- Jio -->
+        <div data-aos="fade-up" class="bg-white p-6 rounded-2xl shadow-lg">
+          <h3 class="text-2xl font-semibold font-serif mb-2">QA Automation Engineer</h3>
+          <p class="text-midBlue text-sm mb-2">Jio Platforms Ltd., Mumbai — Oct 2023 – Apr 2025</p>
+          <ul class="list-disc list-inside text-deepBlue">
+            <li>Led JioMeet automation, boosting test coverage and speed</li>
+            <li>Proposed AI-powered chatbot for better user support</li>
+            <li>Mentored junior QA team members, improving efficiency by 30%</li>
+          </ul>
+        </div>
+        <!-- Edvansity -->
+        <div data-aos="fade-up" class="bg-white p-6 rounded-2xl shadow-lg">
+          <h3 class="text-2xl font-semibold font-serif mb-2">Web Development Faculty</h3>
+          <p class="text-midBlue text-sm mb-2">Edvansity, Mumbai — Jun 2021 – Sept 2022</p>
+          <ul class="list-disc list-inside text-deepBlue">
+            <li>Designed curriculum for 500+ learners (HTML, CSS, JS)</li>
+            <li>Led project-based workshops with a 30% higher completion rate</li>
+            <li>Promoted to Department Head for driving student growth</li>
+          </ul>
+        </div>
+        <!-- Intern -->
+        <div data-aos="fade-up" class="bg-white p-6 rounded-2xl shadow-lg">
+          <h3 class="text-2xl font-semibold font-serif mb-2">Software Engineer Intern</h3>
+          <p class="text-midBlue text-sm mb-2">The Sparks Foundation, Freelance Project, Mumbai — Sep 2020 – Aug 2021</p>
+          <ul class="list-disc list-inside text-deepBlue">
+            <li>Built a digital banking system focused on speed and usability</li>
+            <li>Streamlined backend flows and mapped user journeys</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leadership -->
+  <section id="leadership" class="py-24 bg-lightBlue">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-4xl font-bold mb-12 text-center font-serif text-deepBlue" data-aos="fade-down">Leadership</h2>
+      <div class="grid gap-10 md:grid-cols-2">
+        <!-- Student Ambassador -->
+        <div data-aos="fade-up" class="bg-white p-6 rounded-2xl shadow-lg">
+          <p class="text-sm text-midBlue mb-2">Aug 2025 - Present</p>
+          <h3 class="text-xl font-bold font-serif mb-2">Student Ambassador - MEM, Cornell University</h3>
+          <ul class="list-disc list-inside text-deepBlue">
+            <li>Represent Engineering Management at various events</li>
+            <li>Serving as a panelist during monthly virtual information sessions</li>
+            <li>Acting as a mentor for new students</li>
+          </ul>
+        </div>
+        <!-- President -->
+        <div data-aos="fade-up" class="bg-white p-6 rounded-2xl shadow-lg">
+          <p class="text-sm text-midBlue mb-2">Jan 2022 - Jan 2023</p>
+          <h3 class="text-xl font-bold font-serif mb-2">President - Music Club, FCRIT RHYTHM</h3>
+          <ul class="list-disc list-inside text-deepBlue">
+            <li>Led the club's growth and managed musical events</li>
+            <li>Orchestrated the club's first full-scale performance initiative</li>
+            <li>Scaled FCRIT RHYTHM to become the largest music club on campus</li>
+          </ul>
+        </div>
+        <!-- Event Head -->
+        <div data-aos="fade-up" class="bg-white p-6 rounded-2xl shadow-lg">
+          <p class="text-sm text-midBlue mb-2">Jan 2020 - Jan 2022</p>
+          <h3 class="text-xl font-bold font-serif mb-2">Event Head - Music Club, FCRIT RHYTHM</h3>
+          <ul class="list-disc list-inside text-deepBlue">
+            <li>Oversaw planning and execution of music events on campus</li>
+            <li>Coordinated with artists, faculty, and logistics teams</li>
+          </ul>
+        </div>
+        <!-- CSI Public Relations -->
+        <div data-aos="fade-up" class="bg-white p-6 rounded-2xl shadow-lg">
+          <p class="text-sm text-midBlue mb-2">Jun 2021 - May 2022</p>
+          <h3 class="text-xl font-bold font-serif mb-2">Head of Public Relations - CSI Council, FCRIT</h3>
+          <ul class="list-disc list-inside text-deepBlue">
+            <li>Promoted CSI activities and boosted student engagement</li>
+            <li>Represented the club during inter-college tech fests</li>
+          </ul>
+        </div>
+        <!-- TEDx -->
+        <div data-aos="fade-up" class="bg-white p-6 rounded-2xl shadow-lg">
+          <p class="text-sm text-midBlue mb-2">Feb 2020 - Dec 2020</p>
+          <h3 class="text-xl font-bold font-serif mb-2">Communications & Marketing - TEDxFCRIT</h3>
+          <ul class="list-disc list-inside text-deepBlue">
+            <li>Handled event branding, outreach, and speaker communication</li>
+            <li>Contributed to a TEDx event with wide student participation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="py-24 bg-white">
+    <h2 class="text-4xl font-bold mb-12 text-center font-serif text-deepBlue" data-aos="fade-down">Projects</h2>
+    <div id="projects-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-6 max-w-6xl mx-auto"></div>
+  </section>
+
+  <!-- Useful Links Section -->
+<section id="contact" class="py-24 bg-gray-50">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <h2 class="text-4xl font-bold mb-12 font-serif text-gray-800">
+      Connect with Me
+    </h2>
+
+    <div class="flex flex-col sm:flex-row justify-center gap-12 sm:gap-16 items-center">
+      
+      <!-- LinkedIn -->
+      <a
+        href="https://www.linkedin.com/in/elishagras/"
+        target="_blank"
+        class="flex flex-col items-center text-gray-800 hover:text-blue-700 transition"
+      >
+        <div class="w-16 h-16 flex items-center justify-center bg-white rounded-full shadow-md hover:shadow-xl transition">
+          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M4.98 3.5C4.98 4.6 4.1 5.5 2.98 5.5 1.87 5.5 1 4.6 1 3.5S1.87 1.5 2.98 1.5C4.1 1.5 4.98 2.4 4.98 3.5ZM.5 8.5H5.5V24H.5V8.5ZM8.5 8.5H13.2V10.9H13.3C13.9 9.8 15.7 8.5 18.1 8.5 22 8.5 24 11.1 24 16.1V24H19V16.8C19 14.1 18.9 11 15 11 11.2 11 11 13.8 11 16.6V24H6V8.5H8.5Z"
+            />
+          </svg>
+        </div>
+        <span class="mt-2 font-semibold">LinkedIn</span>
+      </a>
+
+      <!-- Email -->
+      <a
+        href="mailto:elisha.h.gras@gmail.com"
+        class="flex flex-col items-center text-gray-800 hover:text-red-500 transition"
+      >
+        <div class="w-16 h-16 flex items-center justify-center bg-white rounded-full shadow-md hover:shadow-xl transition">
+          <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M20 4H4C2.897 4 2 4.897 2 6V18C2 19.103 2.897 20 4 20H20C21.103 20 22 19.103 22 18V6C22 4.897 21.103 4 20 4ZM20 6L12 11L4 6H20ZM4 18V8L12 13L20 8V18H4Z"
+            />
+          </svg>
+        </div>
+        <span class="mt-2 font-semibold">Email</span>
+      </a>
+</section>
+
+
+  <!-- Footer -->
+  <footer class="py-6 text-center bg-deepBlue text-white relative">
+    <p>© 2025 Elisha Gras</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+  <script>
+    AOS.init({ duration: 1000 });
+
+    new Typed('#typed-text', {
+      strings: ["Engineer", "Musician", "Creator", "Problem Solver"],
+      typeSpeed: 80,
+      backSpeed: 50,
+      backDelay: 1500,
+      loop: true
+    });
+
+    emailjs.init("1CjAL03hTMIn3bWqo");
+
+    function submitForm(event){
+      event.preventDefault();
+      emailjs.sendForm('service_7411oxa','template_r55x476',event.target)
+      .then(res => { alert('Message sent! ✅'); event.target.reset(); })
+      .catch(err => { alert('Error sending message ❌'); console.error(err); });
+    }
+
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+    // Projects fetch
+    fetch('assets/files/projects.json')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('projects-container');
+        data.forEach(project => {
+          const card = document.createElement('div');
+          card.className = `bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transform transition duration-300 group`;
+          let disclaimer = '';
+          if(project.title.toLowerCase().includes('melodease')) disclaimer = `<p class="text-xs italic mt-2 text-deepBlue">Disclaimer: Personal learning project.</p>`;
+          card.innerHTML = `
+            <div class="relative">
+              <img src="${project.image}" alt="${project.title}" class="w-full h-56 object-cover transition duration-300 group-hover:scale-105 group-hover:brightness-90">
+              <div class="absolute inset-0 bg-gradient-to-t from-deepBlue/60 to-transparent opacity-0 group-hover:opacity-100 transition duration-300"></div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2 text-deepBlue font-serif">${project.title}</h3>
+              <p class="text-deepBlue text-sm mb-3 leading-relaxed">${project.description}</p>
+              ${disclaimer}
+              <a href="${project.link}" class="text-midBlue text-sm font-medium hover:underline">View Project</a>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      });
+  </script>
+</body>
+</html>

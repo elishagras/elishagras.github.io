@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Melodease | Elisha Gras</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+      :root{
+        --primary: #3B7B9A;   /* blockchain primary */
+        --accent:  #70AFCE;   /* blockchain accent */
+        --muted:   #6B7280;   /* neutral text */
+      }
+
+      /* Base */
+      body {
+        font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        background: #FFFFFF;
+        color: #0f172a;
+        -webkit-font-smoothing:antialiased;
+        -moz-osx-font-smoothing:grayscale;
+      }
+
+      h1, h2, h3 { font-family: 'Merriweather', Georgia, serif; color: var(--primary); }
+
+      /* Gradient title (same look as blockchain page) */
+      .gradient-title {
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Timeline reveal animation */
+      .timeline-item { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(.2,.9,.3,1); }
+      .timeline-item.show { opacity: 1; transform: translateY(0); }
+
+      /* Hover effects for images and videos */
+      .hover-effect { transition: transform .28s ease, box-shadow .28s ease; border-radius: 1rem; }
+      .hover-effect:hover { transform: translateY(-6px) scale(1.03); box-shadow: 0 18px 40px rgba(16,24,40,0.12); }
+
+      /* Card style for content blocks */
+      .card {
+        background: #FFFFFF;
+        border-radius: 1rem;
+        box-shadow: 0 8px 24px rgba(15,23,42,0.06);
+      }
+
+      /* Table subtle */
+      table td, table th { border-color: #E6EEF5; }
+      thead th { background: linear-gradient(180deg, rgba(112,175,206,0.06), rgba(112,175,206,0.02)); }
+
+      /* Small responsive tweaks */
+      @media (min-width: 1024px) {
+        main { padding-top: 3rem; padding-bottom: 4rem; }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!-- Header -->
+    <header class="bg-[var(--primary)] text-white p-6 shadow-lg">
+      <div class="max-w-6xl mx-auto flex items-center justify-between">
+        <h1 class="text-2xl font-serif font-bold">Melodease: Personalized Music Practice Tracking Platform</h1>
+        <a href="index.html" class="text-white/90 hover:text-[#A5DEF1]">← Back to Portfolio</a>
+      </div>
+    </header>
+
+    <!-- Main (open-flow single column, max width like blockchain) -->
+    <main class="max-w-6xl mx-auto p-6 space-y-10">
+
+      <!-- Hero -->
+      <section class="card p-8 text-center">
+        <h2 class="text-4xl font-bold mb-3 gradient-title">Case Study</h2>
+        <p class="text-lg text-slate-700 max-w-3xl mx-auto leading-relaxed">
+          Melodease is an adaptive music education platform for students of all skill levels - blending personalized lessons, gamification, and AI-powered feedback to make practice consistent, engaging and culturally relevant.
+        </p>
+      </section>
+
+      <!-- Project details -->
+      <section class="card p-6">
+        <h2 class="text-2xl font-bold mb-4">Project Details</h2>
+        <ul class="text-slate-700 space-y-2">
+          <li><span class="font-semibold">Role:</span> Product Designer & Researcher</li>
+          <li><span class="font-semibold">Duration:</span> 4 months</li>
+          <li><span class="font-semibold">Team Size:</span> 2</li>
+          <li><span class="font-semibold">Tools & Tech:</span> Figma, Google Sheets, React.js, AI music feedback frameworks</li>
+          <li><span class="font-semibold">Category:</span> Music Education, Adaptive Learning</li>
+        </ul>
+      </section>
+
+      <!-- Overview -->
+      <section class="timeline-item card p-6">
+        <h2 class="text-2xl font-bold mb-3 border-b pb-2" style="border-color: rgba(112,175,206,0.25)">Overview</h2>
+        <p class="text-slate-700 leading-relaxed">
+          Melodease combines adaptive lessons, gamified progress tracking, and AI-assisted feedback to create a motivating, personalized learning experience - with a focus on diverse cultural content and easy teacher-student loops.
+        </p>
+      </section>
+
+      <!-- Problem statement -->
+      <section class="timeline-item card p-6">
+        <h2 class="text-2xl font-bold mb-3 border-b pb-2" style="border-color: rgba(112,175,206,0.25)">Problem Statement</h2>
+        <ul class="list-disc list-inside text-slate-700 space-y-1">
+          <li>Students struggle to maintain consistent practice and motivation.</li>
+          <li>One-size-fits-all lessons lack personalization for different learners.</li>
+          <li>Most apps miss culturally relevant repertoire and real teacher feedback loops.</li>
+        </ul>
+      </section>
+
+      <!-- User research (full table) -->
+      <section class="timeline-item card p-6">
+        <h2 class="text-2xl font-bold mb-4 border-b pb-2" style="border-color: rgba(112,175,206,0.25)">User Research</h2>
+
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse text-sm">
+            <thead>
+              <tr>
+                <th class="border px-3 py-2 text-left">Student</th>
+                <th class="border px-3 py-2 text-left">Role</th>
+                <th class="border px-3 py-2 text-left">Skill Level</th>
+                <th class="border px-3 py-2 text-left">Tools Used</th>
+                <th class="border px-3 py-2 text-left">Pain Points</th>
+                <th class="border px-3 py-2 text-left">Goals / Motivation</th>
+                <th class="border px-3 py-2 text-left">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd:bg-white even:bg-slate-50">
+                <td class="border px-3 py-2">Student A</td>
+                <td class="border px-3 py-2">5th grade</td>
+                <td class="border px-3 py-2">Trinity Grade 1 (Beginner)</td>
+                <td class="border px-3 py-2">No tools</td>
+                <td class="border px-3 py-2">Practicing new chords and positioning</td>
+                <td class="border px-3 py-2">Wants to be different, improve playing</td>
+                <td class="border px-3 py-2">Curious, needs posture reminders, prefers familiar tunes</td>
+              </tr>
+
+              <tr class="odd:bg-white even:bg-slate-50">
+                <td class="border px-3 py-2">Student B</td>
+                <td class="border px-3 py-2">8th grade</td>
+                <td class="border px-3 py-2">Trinity Grade 2 (Intermediate)</td>
+                <td class="border px-3 py-2">No tools</td>
+                <td class="border px-3 py-2">Difficulty starting new pieces</td>
+                <td class="border px-3 py-2">Stay in touch with music, learn more pieces</td>
+                <td class="border px-3 py-2">Learns with interest, needs practice reminders</td>
+              </tr>
+
+              <tr class="odd:bg-white even:bg-slate-50">
+                <td class="border px-3 py-2">Student C</td>
+                <td class="border px-3 py-2">9th grade</td>
+                <td class="border px-3 py-2">Trinity Grade 2 (Intermediate)</td>
+                <td class="border px-3 py-2">No tools</td>
+                <td class="border px-3 py-2">Struggles with octave recognition</td>
+                <td class="border px-3 py-2">Wants mastery, perform at events</td>
+                <td class="border px-3 py-2">Disciplined, needs tracker for consistency</td>
+              </tr>
+
+              <tr class="odd:bg-white even:bg-slate-50">
+                <td class="border px-3 py-2">Student D</td>
+                <td class="border px-3 py-2">8th grade</td>
+                <td class="border px-3 py-2">Trinity Grade 3 (Advancing)</td>
+                <td class="border px-3 py-2">No tools</td>
+                <td class="border px-3 py-2">Confusion between notes under pressure</td>
+                <td class="border px-3 py-2">Express through music, play instantly</td>
+                <td class="border px-3 py-2">Quick learner, needs drills & ear training</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="mt-4 text-slate-700 leading-relaxed">
+          Target Users: 5th–9th grade students learning piano/keyboard. Pain points include difficulty learning chords, lack of feedback, and inconsistent practice.
+        </p>
+      </section>
+
+      <!-- Competitive analysis (full table) -->
+      <section class="timeline-item card p-6">
+        <h2 class="text-2xl font-bold mb-4 border-b pb-2" style="border-color: rgba(112,175,206,0.25)">Competitive Analysis</h2>
+
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse text-sm">
+            <thead>
+              <tr>
+                <th class="border px-3 py-2 text-left">App</th>
+                <th class="border px-3 py-2 text-left">Target Users</th>
+                <th class="border px-3 py-2 text-left">Key Features</th>
+                <th class="border px-3 py-2 text-left">Pricing</th>
+                <th class="border px-3 py-2 text-left">Weaknesses</th>
+                <th class="border px-3 py-2 text-left">Opportunity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd:bg-white even:bg-slate-50">
+                <td class="border px-3 py-2">Flowkey</td>
+                <td class="border px-3 py-2">Beginners–Intermediate</td>
+                <td class="border px-3 py-2">Follow-along videos, feedback</td>
+                <td class="border px-3 py-2">Freemium</td>
+                <td class="border px-3 py-2">Limited advanced content</td>
+                <td class="border px-3 py-2">Add advanced + Indian songs</td>
+              </tr>
+
+              <tr class="odd:bg-white even:bg-slate-50">
+                <td class="border px-3 py-2">Simply Piano</td>
+                <td class="border px-3 py-2">Beginners</td>
+                <td class="border px-3 py-2">Step-by-step lessons</td>
+                <td class="border px-3 py-2">Subscription</td>
+                <td class="border px-3 py-2">No teacher feedback</td>
+                <td class="border px-3 py-2">Integrate teacher loop</td>
+              </tr>
+
+              <tr class="odd:bg-white even:bg-slate-50">
+                <td class="border px-3 py-2">Yousician</td>
+                <td class="border px-3 py-2">Multi-instrument learners</td>
+                <td class="border px-3 py-2">Gamified challenges</td>
+                <td class="border px-3 py-2">Subscription</td>
+                <td class="border px-3 py-2">Generic content</td>
+                <td class="border px-3 py-2">Add cultural/localized content</td>
+              </tr>
+
+              <tr class="odd:bg-white even:bg-slate-50">
+                <td class="border px-3 py-2">Skoove</td>
+                <td class="border px-3 py-2">Piano learners</td>
+                <td class="border px-3 py-2">Interactive feedback</td>
+                <td class="border px-3 py-2">Freemium</td>
+                <td class="border px-3 py-2">Repetitive lessons</td>
+                <td class="border px-3 py-2">Gamify practice</td>
+              </tr>
+
+              <tr class="odd:bg-white even:bg-slate-50">
+                <td class="border px-3 py-2">Melodics</td>
+                <td class="border px-3 py-2">Intermediate keyboardists</td>
+                <td class="border px-3 py-2">Skill drills</td>
+                <td class="border px-3 py-2">Subscription</td>
+                <td class="border px-3 py-2">Dry, less engaging</td>
+                <td class="border px-3 py-2">Add rewards, streaks</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="mt-4 text-slate-700 leading-relaxed">
+          Competitors show gaps in Indian content, adaptive lessons, and instant feedback. Opportunity exists to integrate adaptive learning and gamified motivation.
+        </p>
+      </section>
+
+      <!-- MoSCoW -->
+      <section class="timeline-item card p-6">
+        <h2 class="text-2xl font-bold mb-4 border-b pb-2" style="border-color: rgba(112,175,206,0.25)">User Stories & Prioritization (MoSCoW)</h2>
+
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse text-sm">
+            <thead>
+              <tr>
+                <th class="border px-4 py-2 text-left">Feature</th>
+                <th class="border px-4 py-2 text-left">MoSCoW Priority</th>
+                <th class="border px-4 py-2 text-left">Description</th>
+                <th class="border px-4 py-2 text-left">Effort</th>
+                <th class="border px-4 py-2 text-left">Impact</th>
+                <th class="border px-4 py-2 text-left">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="odd:bg-white even:bg-slate-50">
+                <td class="border px-4 py-2">Practice Star Tracker</td>
+                <td class="border px-4 py-2"><span class="inline-block px-2 py-1 text-xs font-semibold bg-[#b08968] text-white rounded">Must Have</span></td>
+                <td class="border px-4 py-2">Tracks daily practice streaks, gives badges & stars</td>
+                <td class="border px-4 py-2">Medium</td>
+                <td class="border px-4 py-2">High</td>
+                <td class="border px-4 py-2">Gamifies consistency</td>
+              </tr>
+
+              <tr class="odd:bg-white even:bg-slate-50">
+                <td class="border px-4 py-2">Feedback Loop with Teachers</td>
+                <td class="border px-4 py-2"><span class="inline-block px-2 py-1 text-xs font-semibold bg-[#9d4edd] text-white rounded">Should Have</span></td>
+                <td class="border px-4 py-2">Lets students send recordings and get teacher responses</td>
+                <td class="border px-4 py-2">High</td>
+                <td class="border px-4 py-2">High</td>
+                <td class="border px-4 py-2">Needs upload + messaging logic</td>
+              </tr>
+
+              <tr class="odd:bg-white even:bg-slate-50">
+                <td class="border px-4 py-2">Visual Practice Timer</td>
+                <td class="border px-4 py-2"><span class="inline-block px-2 py-1 text-xs font-semibold bg-[#b08968] text-white rounded">Must Have</span></td>
+                <td class="border px-4 py-2">On-screen timer with visual cues for breaks/practice sessions</td>
+                <td class="border px-4 py-2">Low</td>
+                <td class="border px-4 py-2">Medium</td>
+                <td class="border px-4 py-2">Simple build, improves focus</td>
+              </tr>
+
+              <tr class="odd:bg-white even:bg-slate-50">
+                <td class="border px-4 py-2">Practice Reminder</td>
+                <td class="border px-4 py-2"><span class="inline-block px-2 py-1 text-xs font-semibold bg-[#9d4edd] text-white rounded">Should Have</span></td>
+                <td class="border px-4 py-2">Sends alerts based on user-selected schedule</td>
+                <td class="border px-4 py-2">Low</td>
+                <td class="border px-4 py-2">Medium</td>
+                <td class="border px-4 py-2">Easy to build with notification tools</td>
+              </tr>
+
+              <tr class="odd:bg-white even:bg-slate-50">
+                <td class="border px-4 py-2">Mini Practice Games</td>
+                <td class="border px-4 py-2"><span class="inline-block px-2 py-1 text-xs font-semibold bg-[#52b788] text-white rounded">Could Have</span></td>
+                <td class="border px-4 py-2">Rhythm, pitch, or note games to make practice fun</td>
+                <td class="border px-4 py-2">High</td>
+                <td class="border px-4 py-2">Medium</td>
+                <td class="border px-4 py-2">Fun for young learners, but not urgent</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Wireframes & prototype images (all included) -->
+      <section class="timeline-item card p-6">
+        <h2 class="text-2xl font-bold mb-4 border-b pb-2" style="border-color: rgba(112,175,206,0.25)">Wireframes & Prototype</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <img src="assets/images/Launch Screen.png" alt="Launch Screen" class="hover-effect rounded-lg shadow-sm w-full object-cover" />
+          <img src="assets/images/Profile Page.png" alt="Profile Page" class="hover-effect rounded-lg shadow-sm w-full object-cover" />
+          <img src="assets/images/Practice Star Tracker.png" alt="Practice Star Tracker" class="hover-effect rounded-lg shadow-sm w-full object-cover" />
+          <img src="assets/images/Visual Practice Timer.png" alt="Visual Practice Timer" class="hover-effect rounded-lg shadow-sm w-full object-cover" />
+          <img src="assets/images/Practice Reminder.png" alt="Practice Reminder" class="hover-effect rounded-lg shadow-sm w-full object-cover" />
+          <img src="assets/images/Feedback 1.png" alt="Feedback Wireframe 1" class="hover-effect rounded-lg shadow-sm w-full object-cover" />
+          <img src="assets/images/Feedback 2.png" alt="Feedback Wireframe 2" class="hover-effect rounded-lg shadow-sm w-full object-cover" />
+          <img src="assets/images/Feedback 3.png" alt="Feedback Wireframe 3" class="hover-effect rounded-lg shadow-sm w-full object-cover" />
+    
+      </section>
+
+      <!-- Role & contributions -->
+      <section class="timeline-item card p-6">
+        <h2 class="text-2xl font-bold mb-3 border-b pb-2" style="border-color: rgba(112,175,206,0.25)">Role & Contributions</h2>
+        <ul class="list-disc list-inside text-slate-700 space-y-1">
+          <li>Product conceptualization and research</li>
+          <li>User persona creation, market analysis, competitor benchmarking</li>
+          <li>Wireframing, MoSCoW prioritization, and prototype planning</li>
+          <li>Strategy for AI-assisted real-time feedback</li>
+        </ul>
+      </section>
+
+      <!-- Next steps -->
+      <section class="timeline-item card p-6">
+        <h2 class="text-2xl font-bold mb-3 border-b pb-2" style="border-color: rgba(112,175,206,0.25)">Next Steps / Future Plans</h2>
+        <ul class="list-disc list-inside text-slate-700 space-y-1">
+          <li>Develop interactive prototype using React.js</li>
+          <li>Integrate AI-assisted feedback for real-time corrections</li>
+          <li>Expand gamification and social features</li>
+          <li>Pilot testing with students to refine UX</li>
+        </ul>
+      </section>
+
+      <!-- Tech stack -->
+      <section class="timeline-item card p-6">
+        <h2 class="text-2xl font-bold mb-3 border-b pb-2" style="border-color: rgba(112,175,206,0.25)">Tech Stack</h2>
+        <p class="text-slate-700">Figma, Google Sheets, React.js, AI music feedback frameworks</p>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="p-6 text-center bg-[var(--primary)] text-[#A5DEF1]">
+      © 2025 Elisha Gras
+    </footer>
+
+    <!-- Timeline reveal script (same pattern as blockchain page) -->
+    <script>
+      const items = document.querySelectorAll('.timeline-item');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('show');
+        });
+      }, { threshold: 0.12 });
+      items.forEach(item => observer.observe(item));
+    </script>
+  </body>
+</html>
