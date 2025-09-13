@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="overflow-x-hidden">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +38,7 @@
     .animate-float-fast { animation: float-fast 3s ease-in-out infinite; }
   </style>
 </head>
-<body class="bg-lightBlue text-deepBlue font-sans scroll-smooth relative">
+<body class="bg-lightBlue text-deepBlue font-sans scroll-smooth relative overflow-x-hidden">
 
   <!-- Navigation -->
   <header class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md shadow-md z-50">
@@ -68,10 +68,15 @@
 
   <!-- Hero -->
   <section id="hero" class="min-h-screen flex flex-col justify-center items-center text-center bg-deepBlue text-white px-6 pt-28 sm:pt-32 relative overflow-hidden">
-    <div class="absolute inset-0 overflow-hidden">
-      <div class="absolute w-24 h-24 bg-midBlue/30 rounded-full animate-float-slow -top-10 -left-10"></div>
-      <div class="absolute w-32 h-32 bg-lightBlue/30 rounded-full animate-float-medium -bottom-10 -right-10"></div>
-      <div class="absolute w-16 h-16 bg-midBlue/40 rounded-full animate-float-fast top-1/2 left-10"></div>
+    <div class="absolute inset-0 overflow-hidden max-w-full">
+        <!-- Top left -->
+        <div class="absolute w-24 h-24 bg-midBlue/30 rounded-full animate-float-slow -top-10 left-0"></div>
+
+<!-- Bottom right -->
+        <div class="absolute w-32 h-32 bg-lightBlue/30 rounded-full animate-float-medium bottom-0 right-0"></div>
+
+<!-- Center left -->
+        <div class="absolute w-16 h-16 bg-midBlue/40 rounded-full animate-float-fast top-1/2 left-5"></div>
     </div>
     <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold font-serif mb-6" data-aos="fade-down">Elisha Gras</h1>
     <p class="text-xl sm:text-2xl md:text-3xl mb-10" id="typed-text"></p>
@@ -282,7 +287,18 @@ As a QA Automation Engineer at Jio Platforms, I’ve led automation initiatives,
 
     const menuBtn = document.getElementById('menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
-    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+        // Open menu when hamburger clicked
+        menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+      
+        // Close menu when any link inside mobile menu is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+      });
+  });
 
     // Projects fetch
     fetch('assets/files/projects.json')
@@ -312,6 +328,7 @@ As a QA Automation Engineer at Jio Platforms, I’ve led automation initiatives,
   </script>
 </body>
 </html>
+
 
 
 
