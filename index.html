@@ -71,12 +71,10 @@
       -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
     }
 
-    /* ── Conic ring on photo ── */
+    /* ── Photo ring (static) ── */
     .photo-ring {
-      background:conic-gradient(#3B7B9A 0deg,#70AFCE 120deg,#B8D7E0 240deg,#3B7B9A 360deg);
-      animation:spin 10s linear infinite;
+      background: linear-gradient(135deg, #3B7B9A, #70AFCE);
     }
-    @keyframes spin { to { transform:rotate(360deg); } }
 
     /* ── Float blobs ── */
     @keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-18px)} }
@@ -286,20 +284,6 @@
 <section id="about" class="py-24 bg-white">
   <div class="max-w-6xl mx-auto px-6">
     <div class="flex flex-col lg:flex-row items-center gap-16">
-
-      <!-- Photo -->
-      <div class="flex-shrink-0" data-aos="fade-right">
-        <div class="relative">
-          <img src="assets/images/elcrop.png" alt="Elisha Gras"
-               class="w-64 h-64 sm:w-72 sm:h-72 rounded-3xl object-cover shadow-2xl">
-          <!-- Cornell badge -->
-          <div class="absolute -bottom-5 -right-5 bg-deepBlue text-white rounded-2xl shadow-xl px-4 py-3 max-w-[190px]">
-            <p class="text-[10px] opacity-70 uppercase tracking-wide">Graduate of</p>
-            <p class="font-bold text-sm leading-snug mt-0.5">Cornell University</p>
-            <p class="text-[11px] opacity-70 mt-0.5">M.Eng. Management</p>
-          </div>
-        </div>
-      </div>
 
       <!-- Text -->
       <div data-aos="fade-left" data-aos-delay="100">
