@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PainSense.ai | Elisha Gras</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root { --primary:#3B7B9A; --accent:#70AFCE; --navy:#0D1B2A; }
+    body { font-family:'Inter',sans-serif; background:#fff; color:#0f172a; -webkit-font-smoothing:antialiased; }
+    h1,h2,h3 { font-family:'Merriweather',serif; }
+
+    /* Gradient title */
+    .gradient-title {
+      background: linear-gradient(90deg, #3B7B9A, #70AFCE);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    /* Card */
+    .card { background:#fff; border-radius:1rem; border:1px solid #E2E8F0; box-shadow:0 4px 24px rgba(15,23,42,.06); }
+
+    /* Timeline reveal */
+    .timeline-item { opacity:0; transform:translateY(40px); transition:all .8s cubic-bezier(.2,.9,.3,1); }
+    .timeline-item.show { opacity:1; transform:translateY(0); }
+
+    /* Hover image */
+    .hover-img { transition:transform .3s ease,box-shadow .3s ease; border-radius:1rem; }
+    .hover-img:hover { transform:translateY(-4px) scale(1.02); box-shadow:0 16px 36px rgba(0,0,0,.13); }
+
+    /* Section label */
+    .section-pill {
+      display:inline-flex; align-items:center; gap:6px;
+      background:#EBF4FA; color:#3B7B9A; font-size:.72rem; font-weight:700;
+      padding:5px 13px; border-radius:999px; margin-bottom:.85rem; letter-spacing:.02em; text-transform:uppercase;
+    }
+    .section-pill span { width:6px; height:6px; background:#3B7B9A; border-radius:50%; display:inline-block; }
+
+    /* Stat card */
+    .stat-card { background:#F8FAFC; border:1px solid #E2E8F0; border-radius:1rem; padding:1.25rem; text-align:center; }
+
+    /* Roadmap step */
+    .roadmap-step { position:relative; padding-left:2.5rem; }
+    .roadmap-step::before {
+      content:''; position:absolute; left:0; top:.35rem;
+      width:1.1rem; height:1.1rem; border-radius:50%;
+      background:#3B7B9A; border:3px solid #B8D7E0;
+    }
+    .roadmap-step::after {
+      content:''; position:absolute; left:.53rem; top:1.5rem;
+      width:2px; height:calc(100% + .5rem); background:linear-gradient(to bottom,#70AFCE,#EBF4FA);
+    }
+    .roadmap-step:last-child::after { display:none; }
+
+    /* Tag chip */
+    .chip { display:inline-block; font-size:.7rem; font-weight:600; padding:3px 10px; border-radius:999px; background:#EBF4FA; color:#3B7B9A; }
+
+    /* CTA proto button */
+    .proto-btn {
+      display:inline-flex; align-items:center; gap:.5rem;
+      background:#3B7B9A; color:#fff; font-weight:700;
+      padding:.85rem 2rem; border-radius:.85rem;
+      transition:background .2s ease, transform .2s ease;
+      text-decoration:none;
+    }
+    .proto-btn:hover { background:#70AFCE; transform:translateY(-2px); }
+
+    /* App screenshot grid */
+    .screenshot { border-radius:1.25rem; box-shadow:0 8px 32px rgba(0,0,0,.12); transition:transform .3s ease; }
+    .screenshot:hover { transform:translateY(-6px); }
+
+    /* Lightbox */
+    #lb { display:none; position:fixed; inset:0; background:rgba(2,6,23,.85); z-index:100; align-items:center; justify-content:center; }
+    #lb.open { display:flex; }
+    #lb img { max-width:92%; max-height:88%; border-radius:1rem; box-shadow:0 20px 60px rgba(0,0,0,.4); }
+    #lb-close { position:absolute; top:1.5rem; right:1.5rem; color:#fff; font-size:2rem; cursor:pointer; font-weight:bold; background:rgba(0,0,0,.3); border-radius:.5rem; padding:.15rem .6rem; }
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="bg-[#0D1B2A] text-white shadow-lg">
+  <div class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
+    <div>
+      <a href="index.html" class="text-white/50 text-sm hover:text-white transition mb-1 inline-flex items-center gap-1">
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Back to Portfolio
+      </a>
+      <h1 class="text-xl sm:text-2xl font-serif font-bold text-white mt-0.5">PainSense.ai - Animal Health Hackathon</h1>
+    </div>
+    <a href="index.html" class="hidden sm:block text-2xl font-bold font-serif text-white/80 hover:text-white transition">EG</a>
+  </div>
+  <div class="max-w-6xl mx-auto px-6 pb-4 flex flex-wrap gap-2">
+    <span class="chip">AI / ML</span>
+    <span class="chip">HealthTech</span>
+    <span class="chip">Computer Vision</span>
+    <span class="chip">Hackathon</span>
+    <span class="chip">Product Strategy</span>
+  </div>
+</header>
+
+
+<!-- ── MAIN ── -->
+<main class="max-w-6xl mx-auto px-6 py-10 space-y-10">
+
+  <!-- Hero -->
+  <section class="card p-8 sm:p-10 text-center">
+    <div class="section-pill mx-auto"><span></span>Case Study</div>
+    <h2 class="text-4xl sm:text-5xl font-bold gradient-title mb-4">PainSense.ai</h2>
+    <p class="text-lg text-[#475569] max-w-3xl mx-auto leading-relaxed mb-6">
+      An AI-powered platform that helps dog owners objectively detect and track their pet's pain using computer vision and validated veterinary scoring - built at the Cornell Animal Health Hackathon.
+    </p>
+    <a href="https://polite-pain-sense-ai.base44.app/" target="_blank" class="proto-btn mx-auto w-fit">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+      </svg>
+      View Live Prototype
+    </a>
+  </section>
+
+  <!-- Project Details -->
+  <section class="card p-6">
+    <div class="section-pill"><span></span>Project Details</div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-2">
+      <div class="stat-card">
+        <p class="text-[11px] text-[#94A3B8] font-semibold uppercase tracking-wide mb-1">Context</p>
+        <p class="font-bold text-[#0F172A] text-sm">Animal Health Hackathon</p>
+      </div>
+      <div class="stat-card">
+        <p class="text-[11px] text-[#94A3B8] font-semibold uppercase tracking-wide mb-1">Role</p>
+        <p class="font-bold text-[#0F172A] text-sm">Product Strategy & Research</p>
+      </div>
+      <div class="stat-card">
+        <p class="text-[11px] text-[#94A3B8] font-semibold uppercase tracking-wide mb-1">Team</p>
+        <p class="font-bold text-[#0F172A] text-sm">6 Members</p>
+      </div>
+      <div class="stat-card">
+        <p class="text-[11px] text-[#94A3B8] font-semibold uppercase tracking-wide mb-1">Tech</p>
+        <p class="font-bold text-[#0F172A] text-sm">CNN · CV · LLM</p>
+      </div>
+      <div class="stat-card">
+        <p class="text-[11px] text-[#94A3B8] font-semibold uppercase tracking-wide mb-1">Category</p>
+        <p class="font-bold text-[#0F172A] text-sm">AI · HealthTech</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Motivation -->
+  <section class="timeline-item card p-6">
+    <div class="section-pill"><span></span>Motivation</div>
+    <h2 class="text-2xl font-bold text-[#0F172A] mb-5">The Problem</h2>
+
+    <div class="grid sm:grid-cols-3 gap-5">
+      <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-5">
+        <p class="text-3xl font-bold text-deepBlue mb-1" style="color:#3B7B9A">1 in 5</p>
+        <p class="text-sm text-[#475569] leading-relaxed">dogs live with <strong class="text-[#0F172A]">chronic pain</strong> - often undetected by owners.</p>
+      </div>
+      <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-5">
+        <p class="text-3xl font-bold mb-1" style="color:#3B7B9A">$160B</p>
+        <p class="text-sm text-[#475569] leading-relaxed">US pet market, with dogs representing <strong class="text-[#0F172A]">~55%</strong> (~$90 billion of TAM).</p>
+      </div>
+      <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-5">
+        <p class="text-3xl font-bold mb-1" style="color:#3B7B9A">0</p>
+        <p class="text-sm text-[#475569] leading-relaxed">objective tools for owners to answer: <strong class="text-[#0F172A]">"Is my dog in pain right now?"</strong></p>
+      </div>
+    </div>
+
+    <p class="mt-5 text-[#475569] leading-relaxed text-sm">
+      Existing veterinary pain scoring systems (like the CBPI) are subjective, infrequent, and require a vet visit. Pet owners are left guessing - often missing early signs of chronic pain until it's severe.
+    </p>
+  </section>
+
+
+  <!-- Solution Overview -->
+  <section class="timeline-item card p-6">
+    <div class="section-pill"><span></span>Solution</div>
+    <h2 class="text-2xl font-bold text-[#0F172A] mb-3">What is PainSense.ai?</h2>
+    <p class="text-[#475569] leading-relaxed text-sm mb-5">
+      PainSense.ai is an AI-powered mobile app that lets dog owners upload short videos of their pet's daily activities - walking, eating, sleeping, playing - and receive an objective, continuous pain score from 0 to 10, validated against clinical veterinary standards.
+    </p>
+
+    <div class="grid sm:grid-cols-2 gap-5">
+      <div class="bg-[#EBF4FA] border border-[#3B7B9A]/20 rounded-2xl p-5">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-8 h-8 rounded-xl bg-[#3B7B9A] flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.069A1 1 0 0121 8.82v6.36a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="font-bold text-[#0F172A]">Computer Vision Model</h3>
+        </div>
+        <p class="text-sm text-[#475569] leading-relaxed">
+          AI interpretation of submitted videos via the pet owner, eliminating the subjectivity of previous pain scoring systems. Analyses posture, gait, facial cues, and behavioral patterns.
+        </p>
+      </div>
+
+      <div class="bg-[#EBF4FA] border border-[#3B7B9A]/20 rounded-2xl p-5">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-8 h-8 rounded-xl bg-[#3B7B9A] flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+            </svg>
+          </div>
+          <h3 class="font-bold text-[#0F172A]">AI-Assisted Questionnaire</h3>
+        </div>
+        <p class="text-sm text-[#475569] leading-relaxed">
+          Weekly questionnaire derived from existing validated Canine pain scoring systems (CBPI). AI pre-fills answers from video analysis - the owner can review and adjust.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- System Architecture -->
+  <section class="timeline-item card p-6">
+    <div class="section-pill"><span></span>Technology</div>
+    <h2 class="text-2xl font-bold text-[#0F172A] mb-3">System Architecture - Two-Stream Deep Neural Network</h2>
+    <p class="text-[#475569] text-sm leading-relaxed mb-5">
+      The core AI engine processes dog videos through a dual-stream convolutional neural network, fusing visual appearance and motion data to produce a clinically meaningful pain score.
+    </p>
+
+    <!-- Architecture flow -->
+    <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-center text-sm">
+      <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-4">
+        <p class="font-bold text-[#0F172A] mb-1">Input Layer</p>
+        <p class="text-[#64748B] text-xs leading-relaxed">Dog video submitted by owner<br>(walking, sleeping, eating, running)</p>
+        <p class="mt-2 text-[10px] text-[#94A3B8]">Calibration step establishes baseline behavior</p>
+      </div>
+      <div class="bg-[#EBF4FA] border border-[#3B7B9A]/20 rounded-2xl p-4">
+        <p class="font-bold text-[#3B7B9A] mb-1">Stream 1: RGB</p>
+        <p class="text-[#64748B] text-xs leading-relaxed">CNN detects facial cues, posture shape, and visual discomfort</p>
+        <p class="mt-2 text-[10px] text-[#3B7B9A] font-semibold">Appearance Stream</p>
+      </div>
+      <div class="bg-[#EBF4FA] border border-[#3B7B9A]/20 rounded-2xl p-4">
+        <p class="font-bold text-[#3B7B9A] mb-1">Stream 2: Motion</p>
+        <p class="text-[#64748B] text-xs leading-relaxed">Pose estimation CNN collects movement patterns and keypoints</p>
+        <p class="mt-2 text-[10px] text-[#3B7B9A] font-semibold">Keypoint Stream</p>
+      </div>
+      <div class="bg-[#0D1B2A] border border-transparent rounded-2xl p-4">
+        <p class="font-bold text-white mb-1">Output</p>
+        <p class="text-white/60 text-xs leading-relaxed">Final averaged pain score (0–10) with Mobility + Behavioral sub-scores</p>
+        <p class="mt-2 text-[10px] font-bold" style="color:#70AFCE">CBPI-Validated</p>
+      </div>
+    </div>
+
+    <p class="mt-4 text-xs text-[#94A3B8]">
+      Secondary fallback: In the event of poor video quality, an LLM generates a text prompt as the input layer to the CNN.<br>
+      Research source: Zhu, Hongyi et al. "Video-based Estimation of Pain Indicators in Dogs." arXiv, Sept. 2022.
+    </p>
+  </section>
+
+
+  <!-- App Screenshots -->
+  <section class="timeline-item card p-6">
+    <div class="section-pill"><span></span>Product</div>
+    <h2 class="text-2xl font-bold text-[#0F172A] mb-2">App Screens</h2>
+    <p class="text-[#64748B] text-sm mb-5">
+      A dark-mode mobile interface designed for clarity and ease during emotionally sensitive moments. Key screens below - or
+      <a href="https://polite-pain-sense-ai.base44.app/" target="_blank" class="text-[#3B7B9A] font-semibold hover:underline">explore the live prototype ↗</a>
+    </p>
+
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div class="space-y-1">
+        <img src="assets/images/painsense-dashboard.png" alt="Pain Dashboard"
+             class="screenshot w-full lb-img cursor-pointer"
+             onerror="this.parentElement.innerHTML='<div class=\'w-full h-48 bg-[#F1F5F9] rounded-2xl flex items-center justify-center text-[#94A3B8] text-xs text-center px-2\'>Dashboard<br>Screenshot</div>'">
+        <p class="text-[11px] text-center text-[#94A3B8]">Pain Dashboard</p>
+      </div>
+      <div class="space-y-1">
+        <img src="assets/images/painsense-howit.png" alt="How It Works"
+             class="screenshot w-full lb-img cursor-pointer"
+             onerror="this.parentElement.innerHTML='<div class=\'w-full h-48 bg-[#F1F5F9] rounded-2xl flex items-center justify-center text-[#94A3B8] text-xs text-center px-2\'>How It Works<br>Screenshot</div>'">
+        <p class="text-[11px] text-center text-[#94A3B8]">How It Works</p>
+      </div>
+      <div class="space-y-1">
+        <img src="assets/images/painsense-profile.png" alt="Profile"
+             class="screenshot w-full lb-img cursor-pointer"
+             onerror="this.parentElement.innerHTML='<div class=\'w-full h-48 bg-[#F1F5F9] rounded-2xl flex items-center justify-center text-[#94A3B8] text-xs text-center px-2\'>Profile &amp; Pets<br>Screenshot</div>'">
+        <p class="text-[11px] text-center text-[#94A3B8]">Profile & Pets</p>
+      </div>
+      <div class="space-y-1">
+        <img src="assets/images/painsense-upload.png" alt="Video Upload"
+             class="screenshot w-full lb-img cursor-pointer"
+             onerror="this.parentElement.innerHTML='<div class=\'w-full h-48 bg-[#F1F5F9] rounded-2xl flex items-center justify-center text-[#94A3B8] text-xs text-center px-2\'>Video Upload<br>Screenshot</div>'">
+        <p class="text-[11px] text-center text-[#94A3B8]">Video Upload</p>
+      </div>
+    </div>
+
+    <!-- Key features list -->
+    <div class="mt-6 grid sm:grid-cols-2 gap-3">
+      <div class="flex gap-3 items-start">
+        <span class="text-[#3B7B9A] font-bold text-lg leading-none">▸</span>
+        <div><p class="font-semibold text-[#0F172A] text-sm">Real-time Pain Score</p><p class="text-[#64748B] text-xs mt-0.5">Continuous 0–10 rating with severity label (Normal / Mild / Moderate / Severe)</p></div>
+      </div>
+      <div class="flex gap-3 items-start">
+        <span class="text-[#3B7B9A] font-bold text-lg leading-none">▸</span>
+        <div><p class="font-semibold text-[#0F172A] text-sm">Pain Analytics Timeline</p><p class="text-[#64748B] text-xs mt-0.5">Track pain trends: All Time, Pre Surgery, Post Surgery, On Medication</p></div>
+      </div>
+      <div class="flex gap-3 items-start">
+        <span class="text-[#3B7B9A] font-bold text-lg leading-none">▸</span>
+        <div><p class="font-semibold text-[#0F172A] text-sm">AI Summary</p><p class="text-[#64748B] text-xs mt-0.5">Natural-language weekly health summary generated from analysis data</p></div>
+      </div>
+      <div class="flex gap-3 items-start">
+        <span class="text-[#3B7B9A] font-bold text-lg leading-none">▸</span>
+        <div><p class="font-semibold text-[#0F172A] text-sm">Anomaly Alerts</p><p class="text-[#64748B] text-xs mt-0.5">Push notifications when unusual pain patterns are detected</p></div>
+      </div>
+      <div class="flex gap-3 items-start">
+        <span class="text-[#3B7B9A] font-bold text-lg leading-none">▸</span>
+        <div><p class="font-semibold text-[#0F172A] text-sm">Multi-Pet Profiles</p><p class="text-[#64748B] text-xs mt-0.5">Support for multiple dogs with individual calibration baselines</p></div>
+      </div>
+      <div class="flex gap-3 items-start">
+        <span class="text-[#3B7B9A] font-bold text-lg leading-none">▸</span>
+        <div><p class="font-semibold text-[#0F172A] text-sm">Video Gallery</p><p class="text-[#64748B] text-xs mt-0.5">History of analyzed videos tagged by activity (running, eating, walking…)</p></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Subscription Model -->
+  <section class="timeline-item card p-6">
+    <div class="section-pill"><span></span>Business Model</div>
+    <h2 class="text-2xl font-bold text-[#0F172A] mb-5">Subscription Plans</h2>
+
+    <div class="grid sm:grid-cols-2 gap-5 mb-5">
+      <div class="bg-[#F8FAFC] border-2 border-[#E2E8F0] rounded-2xl p-6">
+        <span class="inline-block text-xs font-bold text-[#3B7B9A] bg-[#EBF4FA] px-3 py-1 rounded-full mb-3">Solo Pup Plan</span>
+        <p class="text-[#475569] text-sm mb-3">For first-time users & single-dog households</p>
+        <p class="text-2xl font-bold text-[#0F172A]">$10.99 <span class="text-sm font-normal text-[#94A3B8]">/ month</span></p>
+        <p class="text-sm text-[#94A3B8]">or $99.99 / year</p>
+      </div>
+      <div class="bg-[#0D1B2A] border border-white/10 rounded-2xl p-6">
+        <span class="inline-block text-xs font-bold text-[#70AFCE] bg-white/10 px-3 py-1 rounded-full mb-3">Pack Leader Plan</span>
+        <p class="text-white/60 text-sm mb-3">For multi-dog households - unlimited pet profiles</p>
+        <p class="text-2xl font-bold text-white">$20.99 <span class="text-sm font-normal text-white/40">/ month</span></p>
+        <p class="text-sm text-white/40">or $179.99 / year</p>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-3">
+      <span class="inline-flex items-center gap-1.5 text-sm text-[#475569] bg-[#F8FAFC] border border-[#E2E8F0] px-4 py-2 rounded-xl">
+        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+        1 month FREE trial
+      </span>
+      <span class="inline-flex items-center gap-1.5 text-sm text-[#475569] bg-[#F8FAFC] border border-[#E2E8F0] px-4 py-2 rounded-xl">
+        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+        Invite 1 friend → get 1 free month
+      </span>
+    </div>
+  </section>
+
+
+  <!-- Business Strategy -->
+  <section class="timeline-item card p-6">
+    <div class="section-pill"><span></span>Strategy</div>
+    <h2 class="text-2xl font-bold text-[#0F172A] mb-5">Business Strategy</h2>
+
+    <div class="grid sm:grid-cols-2 gap-6">
+      <div>
+        <h3 class="font-bold text-[#0F172A] mb-3 font-serif">What pet owners gain</h3>
+        <ul class="space-y-2">
+          <li class="flex gap-2 text-sm text-[#475569]"><span class="text-[#3B7B9A] mt-0.5 flex-shrink-0">▸</span>Peace of mind - know your dog's pain status anytime</li>
+          <li class="flex gap-2 text-sm text-[#475569]"><span class="text-[#3B7B9A] mt-0.5 flex-shrink-0">▸</span>Track pain management effectiveness over time</li>
+          <li class="flex gap-2 text-sm text-[#475569]"><span class="text-[#3B7B9A] mt-0.5 flex-shrink-0">▸</span>Early detection before pain becomes severe</li>
+          <li class="flex gap-2 text-sm text-[#475569]"><span class="text-[#3B7B9A] mt-0.5 flex-shrink-0">▸</span>Better, data-backed decisions for vet visits</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-bold text-[#0F172A] mb-3 font-serif">What the business gains</h3>
+        <ul class="space-y-2">
+          <li class="flex gap-2 text-sm text-[#475569]"><span class="text-[#3B7B9A] mt-0.5 flex-shrink-0">▸</span>Proprietary data for model improvement</li>
+          <li class="flex gap-2 text-sm text-[#475569]"><span class="text-[#3B7B9A] mt-0.5 flex-shrink-0">▸</span>Scalable SaaS growth with low marginal cost</li>
+          <li class="flex gap-2 text-sm text-[#475569]"><span class="text-[#3B7B9A] mt-0.5 flex-shrink-0">▸</span>Rapid market penetration through referral loops</li>
+          <li class="flex gap-2 text-sm text-[#475569]"><span class="text-[#3B7B9A] mt-0.5 flex-shrink-0">▸</span>Strong pathway to B2B expansion (vet clinics, hospitals)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Go-To-Market -->
+  <section class="timeline-item card p-6">
+    <div class="section-pill"><span></span>Go-To-Market</div>
+    <h2 class="text-2xl font-bold text-[#0F172A] mb-5">GTM Strategy</h2>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-4">
+        <p class="font-bold text-[#0F172A] text-sm mb-1">Early Adopters</p>
+        <p class="text-xs text-[#64748B]">Pet owners through targeted digital marketing, focusing on dogs (~55% of TAM)</p>
+      </div>
+      <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-4">
+        <p class="font-bold text-[#0F172A] text-sm mb-1">Vet School Partnerships</p>
+        <p class="text-xs text-[#64748B]">Strategic partnerships with veterinary schools for validation and early distribution</p>
+      </div>
+      <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-4">
+        <p class="font-bold text-[#0F172A] text-sm mb-1">GP Vet Recommendations</p>
+        <p class="text-xs text-[#64748B]">General practice vets recommending PainSense to clients post-consultation</p>
+      </div>
+      <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-4">
+        <p class="font-bold text-[#0F172A] text-sm mb-1">Pilot Program</p>
+        <p class="text-xs text-[#64748B]">Pilot with small-scale veterinary practices to gather model training data</p>
+      </div>
+      <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-4">
+        <p class="font-bold text-[#0F172A] text-sm mb-1">Influencer Marketing</p>
+        <p class="text-xs text-[#64748B]">Performance marketing on social media through pet influencer testimonials</p>
+      </div>
+      <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-4">
+        <p class="font-bold text-[#0F172A] text-sm mb-1">Referral Program</p>
+        <p class="text-xs text-[#64748B]">Invite 1 friend → get 1 free month; viral loop built into the product</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Product Roadmap -->
+  <section class="timeline-item card p-6">
+    <div class="section-pill"><span></span>Roadmap</div>
+    <h2 class="text-2xl font-bold text-[#0F172A] mb-6">Product Timeline</h2>
+
+    <div class="space-y-8 pl-2">
+      <div class="roadmap-step">
+        <div class="bg-[#EBF4FA] border border-[#3B7B9A]/20 rounded-2xl p-5">
+          <span class="inline-block text-xs font-bold text-[#3B7B9A] bg-white border border-[#3B7B9A]/20 px-3 py-1 rounded-full mb-2">Year 1</span>
+          <h3 class="font-bold text-[#0F172A] mb-1">V1 App Launch - Dogs, CV-Only</h3>
+          <p class="text-sm text-[#64748B]">Prove product–market fit with dog pain detection and establish recurring subscription revenue.</p>
+        </div>
+      </div>
+
+      <div class="roadmap-step">
+        <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-5">
+          <span class="inline-block text-xs font-bold text-[#64748B] bg-white border border-[#E2E8F0] px-3 py-1 rounded-full mb-2">Year 2–3 · Series A Target: $10M</span>
+          <h3 class="font-bold text-[#0F172A] mb-1">V2 - Multispecies + Wearables</h3>
+          <p class="text-sm text-[#64748B]">Move from "app" to "platform" - go multimodal (video + sensor) and expand to cats, horses, and other species.</p>
+        </div>
+      </div>
+
+      <div class="roadmap-step">
+        <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-5">
+          <span class="inline-block text-xs font-bold text-[#64748B] bg-white border border-[#E2E8F0] px-3 py-1 rounded-full mb-2">Year 3–4</span>
+          <h3 class="font-bold text-[#0F172A] mb-1">Animal Health Infrastructure</h3>
+          <p class="text-sm text-[#64748B]">Become embedded infrastructure inside animal hospitals, veterinary clinics, and broader animal health platforms.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- My Role -->
+  <section class="timeline-item card p-6">
+    <div class="section-pill"><span></span>Contribution</div>
+    <h2 class="text-2xl font-bold text-[#0F172A] mb-4">My Role</h2>
+    <p class="text-[#475569] text-sm mb-4">
+      As a member of <strong class="text-[#0F172A]">The Pawject Managers</strong> team - alongside Snehal Bakre, Amanda Claas, Neel Kanjani, Clara Manley, and Harshit Sharma - I contributed across product strategy and business design:
+    </p>
+    <ul class="space-y-2">
+      <li class="flex gap-2 text-sm text-[#475569]"><span class="text-[#3B7B9A] mt-0.5 flex-shrink-0">▸</span>Defined the product concept and problem framing (pain gap in pet care)</li>
+      <li class="flex gap-2 text-sm text-[#475569]"><span class="text-[#3B7B9A] mt-0.5 flex-shrink-0">▸</span>Shaped the go-to-market strategy and subscription model design</li>
+      <li class="flex gap-2 text-sm text-[#475569]"><span class="text-[#3B7B9A] mt-0.5 flex-shrink-0">▸</span>Contributed to the business strategy and revenue model</li>
+      <li class="flex gap-2 text-sm text-[#475569]"><span class="text-[#3B7B9A] mt-0.5 flex-shrink-0">▸</span>Helped prototype and validate the app flow and user experience</li>
+      <li class="flex gap-2 text-sm text-[#475569]"><span class="text-[#3B7B9A] mt-0.5 flex-shrink-0">▸</span>Contributed to the investor-facing pitch deck and roadmap</li>
+    </ul>
+  </section>
+
+
+  <!-- Tech Stack -->
+  <section class="timeline-item card p-6">
+    <div class="section-pill"><span></span>Tech Stack</div>
+    <h2 class="text-2xl font-bold text-[#0F172A] mb-4">Technologies</h2>
+    <div class="flex flex-wrap gap-2">
+      <span class="chip">Convolutional Neural Network (CNN)</span>
+      <span class="chip">Computer Vision</span>
+      <span class="chip">Keypoint / Pose Estimation</span>
+      <span class="chip">LLM (fallback input)</span>
+      <span class="chip">CBPI Pain Scoring</span>
+      <span class="chip">Mobile App (React / Base44)</span>
+      <span class="chip">Figma</span>
+    </div>
+  </section>
+
+
+  <!-- Live Prototype CTA -->
+  <section class="timeline-item bg-[#0D1B2A] rounded-3xl p-8 sm:p-10 text-center">
+    <p class="text-white/50 text-sm font-semibold uppercase tracking-widest mb-2">Live Demo</p>
+    <h2 class="text-3xl font-bold font-serif text-white mb-3">Try PainSense.ai</h2>
+    <p class="text-white/55 text-sm mb-7 max-w-md mx-auto">
+      Explore the working prototype - upload a video and see the AI pain scoring in action.
+    </p>
+    <a href="https://polite-pain-sense-ai.base44.app/" target="_blank" class="proto-btn mx-auto w-fit">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+      </svg>
+      Open Prototype
+    </a>
+  </section>
+
+</main>
+
+
+<!-- ── LIGHTBOX ── -->
+<div id="lb">
+  <span id="lb-close">&times;</span>
+  <img id="lb-img" src="" alt="expanded">
+</div>
+
+
+<!-- ── FOOTER ── -->
+<footer class="bg-[#0D1B2A] py-10 mt-4">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <a href="index.html"
+       class="inline-flex items-center gap-1.5 text-[#70AFCE] hover:text-white text-sm font-medium transition mb-4">
+      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+      </svg>
+      Back to Portfolio
+    </a>
+    <p class="text-white/25 text-xs mt-2">© 2025 Elisha Gras</p>
+  </div>
+</footer>
+
+
+<script>
+  /* Timeline reveal */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('show'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.timeline-item').forEach(el => obs.observe(el));
+
+  /* Lightbox */
+  const lb    = document.getElementById('lb');
+  const lbImg = document.getElementById('lb-img');
+  document.querySelectorAll('.lb-img').forEach(img => {
+    img.addEventListener('click', () => {
+      lbImg.src = img.src;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  function closeLB() { lb.classList.remove('open'); lbImg.src=''; document.body.style.overflow=''; }
+  document.getElementById('lb-close').addEventListener('click', closeLB);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLB(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLB(); });
+</script>
+</body>
+</html>

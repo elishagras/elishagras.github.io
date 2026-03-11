@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elisha Gras | Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy:     '#0D1B2A',
+            deepBlue: '#3B7B9A',
+            midBlue:  '#70AFCE',
+            lightBlue:'#B8D7E0',
+            blueLight:'#EBF4FA'
+          },
+          fontFamily: {
+            sans:  ['Inter', 'sans-serif'],
+            serif: ['Merriweather', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root { --primary:#3B7B9A; --accent:#70AFCE; --navy:#0D1B2A; }
+
+    /* ── Scroll progress ── */
+    #progress-bar {
+      position:fixed; top:0; left:0; height:3px; width:0%;
+      background:linear-gradient(90deg,#3B7B9A,#70AFCE);
+      z-index:200; transition:width .05s linear;
+    }
+
+    /* ── Navbar ── */
+    #navbar { transition:background .35s ease, box-shadow .35s ease; }
+    #navbar.scrolled {
+      background:rgba(255,255,255,.97) !important;
+      box-shadow:0 2px 24px rgba(0,0,0,.07);
+    }
+    .nav-link { color:rgba(255,255,255,.82); transition:color .2s; position:relative; }
+    .nav-link::after {
+      content:''; position:absolute; bottom:-3px; left:0;
+      width:0; height:2px; background:#70AFCE; transition:width .25s ease;
+    }
+    .nav-link:hover::after { width:100%; }
+    .nav-link:hover { color:#fff; }
+    #navbar.scrolled .nav-link        { color:#475569; }
+    #navbar.scrolled .nav-link:hover  { color:#3B7B9A; }
+    #navbar.scrolled .nav-link::after { background:#3B7B9A; }
+    #navbar.scrolled .logo-text       { color:#3B7B9A; }
+    #navbar.scrolled #menu-btn        { color:#3B7B9A; }
+    .logo-text { color:#fff; transition:color .35s; }
+    #menu-btn  { color:#fff; transition:color .35s; }
+
+    /* ── Hero dot grid ── */
+    .dot-grid {
+      background-image:radial-gradient(rgba(112,175,206,.14) 1px, transparent 1px);
+      background-size:30px 30px;
+    }
+
+    /* ── Gradient text ── */
+    .gradient-text {
+      background:linear-gradient(135deg,#B8D7E0 0%,#70AFCE 45%,#3B7B9A 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+
+    /* ── Conic ring on photo ── */
+    .photo-ring {
+      background:conic-gradient(#3B7B9A 0deg,#70AFCE 120deg,#B8D7E0 240deg,#3B7B9A 360deg);
+      animation:spin 10s linear infinite;
+    }
+    @keyframes spin { to { transform:rotate(360deg); } }
+
+    /* ── Float blobs ── */
+    @keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-18px)} }
+    .float-a { animation:floatY 7s ease-in-out infinite; }
+    .float-b { animation:floatY 5.5s ease-in-out infinite 1.2s; }
+    .float-c { animation:floatY 4.5s ease-in-out infinite .5s; }
+
+    /* ── Section labels ── */
+    .section-pill {
+      display:inline-flex; align-items:center; gap:6px;
+      background:#EBF4FA; color:#3B7B9A; font-size:.75rem; font-weight:600;
+      padding:6px 14px; border-radius:999px; margin-bottom:1rem;
+    }
+    .section-pill span { width:6px; height:6px; background:#3B7B9A; border-radius:50%; display:inline-block; }
+
+    /* ── Skill chip ── */
+    .skill-chip { transition:transform .18s ease, box-shadow .18s ease; cursor:default; }
+    .skill-chip:hover { transform:translateY(-2px); box-shadow:0 4px 14px rgba(59,123,154,.2); }
+
+    /* ── Experience timeline ── */
+    .exp-dot {
+      position:absolute; left:-2.35rem; top:.25rem;
+      width:1.1rem; height:1.1rem; border-radius:50%;
+      border:3px solid #fff; box-shadow:0 0 0 2px #70AFCE;
+    }
+
+    /* ── Project card ── */
+    .proj-card { transition:transform .32s cubic-bezier(.4,0,.2,1), box-shadow .32s cubic-bezier(.4,0,.2,1); }
+    .proj-card:hover { transform:translateY(-8px); box-shadow:0 28px 56px rgba(15,23,42,.12); }
+    .proj-card .proj-thumb { transition:transform .4s ease; }
+    .proj-card:hover .proj-thumb { transform:scale(1.07); }
+
+    /* ── Leadership card ── */
+    .lead-card { transition:transform .22s ease, border-color .22s ease; }
+    .lead-card:hover { transform:translateY(-4px); border-color:rgba(112,175,206,.5) !important; }
+
+    /* ── Contact card ── */
+    .contact-card { transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease; }
+    .contact-card:hover { transform:translateY(-6px); box-shadow:0 20px 40px rgba(15,23,42,.1); border-color:#3B7B9A !important; }
+
+    /* ── Focus ring on inputs ── */
+    input:focus, textarea:focus {
+      outline:none; border-color:#3B7B9A !important;
+      box-shadow:0 0 0 3px rgba(59,123,154,.15);
+    }
+
+    /* ── Scroll cue bounce ── */
+    @keyframes bounce-slow { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+    .bounce-slow { animation:bounce-slow 2s ease-in-out infinite; }
+  </style>
+</head>
+
+<body class="bg-white text-[#0F172A] font-sans antialiased overflow-x-hidden">
+
+<!-- ─────────────────────────────────────────
+     SCROLL PROGRESS
+──────────────────────────────────────────── -->
+<div id="progress-bar"></div>
+
+
+<!-- ─────────────────────────────────────────
+     NAVIGATION
+──────────────────────────────────────────── -->
+<header id="navbar" class="fixed top-0 left-0 w-full z-50 py-4">
+  <div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
+
+    <a href="#hero" class="logo-text text-2xl font-bold font-serif">EG</a>
+
+    <!-- Desktop -->
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="#about"      class="nav-link text-sm font-medium">About</a>
+      <a href="#skills"     class="nav-link text-sm font-medium">Skills</a>
+      <a href="#experience" class="nav-link text-sm font-medium">Experience</a>
+      <a href="#projects"   class="nav-link text-sm font-medium">Projects</a>
+      <a href="#leadership" class="nav-link text-sm font-medium">Leadership</a>
+      <a href="#contact"    class="nav-link text-sm font-medium">Contact</a>
+      <a href="assets/files/resume.pdf" target="_blank"
+         class="px-4 py-2 bg-deepBlue text-white text-sm font-semibold rounded-xl hover:bg-midBlue transition-colors shadow-sm">
+        Resume ↗
+      </a>
+    </nav>
+
+    <!-- Hamburger -->
+    <button id="menu-btn" class="md:hidden" aria-label="Toggle menu">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-[#0D1B2A]/98 backdrop-blur-md border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
+      <a href="#about"      class="text-white/80 font-medium py-3 border-b border-white/10 hover:text-white transition">About</a>
+      <a href="#skills"     class="text-white/80 font-medium py-3 border-b border-white/10 hover:text-white transition">Skills</a>
+      <a href="#experience" class="text-white/80 font-medium py-3 border-b border-white/10 hover:text-white transition">Experience</a>
+      <a href="#projects"   class="text-white/80 font-medium py-3 border-b border-white/10 hover:text-white transition">Projects</a>
+      <a href="#leadership" class="text-white/80 font-medium py-3 border-b border-white/10 hover:text-white transition">Leadership</a>
+      <a href="#contact"    class="text-white/80 font-medium py-3 border-b border-white/10 hover:text-white transition">Contact</a>
+      <a href="assets/files/resume.pdf" target="_blank"
+         class="mt-3 text-center py-3 bg-deepBlue text-white font-semibold rounded-xl hover:bg-midBlue transition-colors">
+        Download Resume ↗
+      </a>
+    </div>
+  </div>
+</header>
+
+
+<!-- ─────────────────────────────────────────
+     HERO
+──────────────────────────────────────────── -->
+<section id="hero" class="relative min-h-screen flex items-center bg-navy overflow-hidden dot-grid">
+
+  <!-- Ambient glow blobs -->
+  <div class="absolute top-1/4 left-1/4  w-80 h-80 bg-deepBlue/20 rounded-full blur-3xl float-a pointer-events-none"></div>
+  <div class="absolute bottom-1/3 right-1/4 w-96 h-96 bg-midBlue/15 rounded-full blur-3xl float-b pointer-events-none"></div>
+  <div class="absolute top-2/3  left-8    w-52 h-52 bg-lightBlue/10 rounded-full blur-2xl float-c pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto px-6 w-full py-32 lg:py-0">
+    <div class="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20">
+
+      <!-- ── Text ── -->
+      <div class="flex-1 text-center lg:text-left" data-aos="fade-right" data-aos-duration="900">
+
+        <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-6">
+          <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+          <span class="text-white/80 text-sm font-medium">Open to Opportunities</span>
+        </div>
+
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold font-serif text-white leading-tight mb-4">
+          Elisha<br><span class="gradient-text">Gras</span>
+        </h1>
+
+        <p class="text-xl sm:text-2xl text-white/65 mb-3 font-light min-h-[2rem]">
+          <span id="typed-text"></span>
+        </p>
+
+        <p class="text-white/45 text-base sm:text-lg mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+          Engineering Management Graduate · Cornell University<br>
+          Building at the intersection of technology and human experience.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <a href="#projects"
+             class="px-7 py-3.5 bg-deepBlue text-white font-semibold rounded-xl hover:bg-midBlue shadow-lg hover:shadow-deepBlue/40 transition-all duration-300 hover:-translate-y-0.5">
+            View My Work →
+          </a>
+          <a href="assets/files/resume.pdf" target="_blank"
+             class="px-7 py-3.5 bg-white/10 border border-white/25 text-white font-semibold rounded-xl hover:bg-white/20 backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5">
+            Download Resume ↗
+          </a>
+        </div>
+
+        <!-- Social icons -->
+        <div class="flex gap-5 mt-10 justify-center lg:justify-start">
+          <a href="https://www.linkedin.com/in/elishagras/" target="_blank"
+             class="text-white/40 hover:text-white transition-colors" aria-label="LinkedIn">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M4.98 3.5C4.98 4.6 4.1 5.5 2.98 5.5 1.87 5.5 1 4.6 1 3.5S1.87 1.5 2.98 1.5C4.1 1.5 4.98 2.4 4.98 3.5ZM.5 8.5H5.5V24H.5V8.5ZM8.5 8.5H13.2V10.9H13.3C13.9 9.8 15.7 8.5 18.1 8.5 22 8.5 24 11.1 24 16.1V24H19V16.8C19 14.1 18.9 11 15 11 11.2 11 11 13.8 11 16.6V24H6V8.5H8.5Z"/>
+            </svg>
+          </a>
+          <a href="mailto:elisha.h.gras@gmail.com"
+             class="text-white/40 hover:text-white transition-colors" aria-label="Email">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 6L12 11L4 6H20ZM4 18V8L12 13L20 8V18H4Z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- ── Photo ── -->
+      <div class="flex-shrink-0" data-aos="fade-left" data-aos-duration="900" data-aos-delay="200">
+        <div class="relative">
+          <!-- Spinning ring -->
+          <div class="w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full photo-ring p-[3px] shadow-2xl shadow-deepBlue/30">
+            <img src="assets/images/elcrop.png" alt="Elisha Gras"
+                 class="w-full h-full rounded-full object-cover">
+          </div>
+          <!-- Floating stat badges -->
+          <div class="absolute -bottom-4 -left-8 bg-white rounded-2xl shadow-xl px-4 py-3 float-b">
+            <p class="text-[10px] text-gray-400 font-medium uppercase tracking-wide">Students Mentored</p>
+            <p class="text-2xl font-bold text-deepBlue leading-none mt-0.5">50+</p>
+          </div>
+          <div class="absolute -top-4 -right-4 bg-navy border border-white/20 rounded-2xl shadow-xl px-4 py-3 float-a">
+            <p class="text-[10px] text-white/50 font-medium uppercase tracking-wide">Learners Taught</p>
+            <p class="text-2xl font-bold text-midBlue leading-none mt-0.5">500+</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scroll cue -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-white/25 bounce-slow">
+    <span class="text-[10px] tracking-widest uppercase font-medium">Scroll</span>
+    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────
+     ABOUT
+──────────────────────────────────────────── -->
+<section id="about" class="py-24 bg-white">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex flex-col lg:flex-row items-center gap-16">
+
+      <!-- Photo -->
+      <div class="flex-shrink-0" data-aos="fade-right">
+        <div class="relative">
+          <img src="assets/images/elcrop.png" alt="Elisha Gras"
+               class="w-64 h-64 sm:w-72 sm:h-72 rounded-3xl object-cover shadow-2xl">
+          <!-- Cornell badge -->
+          <div class="absolute -bottom-5 -right-5 bg-deepBlue text-white rounded-2xl shadow-xl px-4 py-3 max-w-[190px]">
+            <p class="text-[10px] opacity-70 uppercase tracking-wide">Graduate of</p>
+            <p class="font-bold text-sm leading-snug mt-0.5">Cornell University</p>
+            <p class="text-[11px] opacity-70 mt-0.5">M.Eng. Management</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div data-aos="fade-left" data-aos-delay="100">
+        <div class="section-pill"><span></span>About Me</div>
+        <h2 class="text-4xl font-bold font-serif text-[#0F172A] mb-6 leading-snug">
+          Engineer, Educator,<br>& Creator
+        </h2>
+        <div class="space-y-4 text-[#475569] leading-relaxed text-[15px]">
+          <p>
+            I'm an <strong class="text-deepBlue font-semibold">Engineering Management graduate from Cornell University</strong>,
+            passionate about merging technology, creativity, and strategy to build meaningful solutions.
+          </p>
+          <p>
+            I founded <strong class="text-deepBlue font-semibold">E-Forte Music Academy</strong>, designing structured keyboard
+            programs aligned with Trinity College London and mentoring 50+ students - blending entrepreneurship
+            with a lifelong love of music.
+          </p>
+          <p>
+            As a <strong class="text-deepBlue font-semibold">QA Automation Engineer at Jio Platforms</strong>, I led automation
+            initiatives, streamlined testing workflows, and implemented AI-powered solutions with measurable impact.
+            My projects span blockchain frameworks, IoT security, and adaptive music education apps.
+          </p>
+        </div>
+
+        <!-- Stats -->
+        <div class="mt-8 grid grid-cols-3 gap-4">
+          <div class="text-center p-4 bg-[#F8FAFC] rounded-2xl border border-[#E2E8F0]">
+            <p class="text-3xl font-bold text-deepBlue">50+</p>
+            <p class="text-[11px] text-[#64748B] mt-1 font-medium">Students Mentored</p>
+          </div>
+          <div class="text-center p-4 bg-[#F8FAFC] rounded-2xl border border-[#E2E8F0]">
+            <p class="text-3xl font-bold text-deepBlue">500+</p>
+            <p class="text-[11px] text-[#64748B] mt-1 font-medium">Learners Taught</p>
+          </div>
+          <div class="text-center p-4 bg-[#F8FAFC] rounded-2xl border border-[#E2E8F0]">
+            <p class="text-3xl font-bold text-deepBlue">3+</p>
+            <p class="text-[11px] text-[#64748B] mt-1 font-medium">Major Projects</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────
+     SKILLS
+──────────────────────────────────────────── -->
+<section id="skills" class="py-24 bg-[#F8FAFC]">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="text-center mb-14" data-aos="fade-down">
+      <div class="section-pill inline-flex"><span></span>What I Work With</div>
+      <h2 class="text-4xl font-bold font-serif text-[#0F172A]">Skills & Technologies</h2>
+    </div>
+
+    <div class="space-y-8">
+
+      <div data-aos="fade-up">
+        <p class="text-[11px] font-bold text-[#94A3B8] uppercase tracking-widest mb-3">Programming Languages</p>
+        <div class="flex flex-wrap gap-2.5">
+          <span class="skill-chip px-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#334155] shadow-sm">Python</span>
+          <span class="skill-chip px-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#334155] shadow-sm">JavaScript</span>
+          <span class="skill-chip px-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#334155] shadow-sm">Solidity</span>
+          <span class="skill-chip px-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#334155] shadow-sm">Java</span>
+          <span class="skill-chip px-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#334155] shadow-sm">Dart</span>
+          <span class="skill-chip px-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#334155] shadow-sm">HTML & CSS</span>
+        </div>
+      </div>
+
+      <div data-aos="fade-up" data-aos-delay="80">
+        <p class="text-[11px] font-bold text-[#94A3B8] uppercase tracking-widest mb-3">Frameworks & Libraries</p>
+        <div class="flex flex-wrap gap-2.5">
+          <span class="skill-chip px-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#334155] shadow-sm">React.js</span>
+          <span class="skill-chip px-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#334155] shadow-sm">Flutter</span>
+          <span class="skill-chip px-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#334155] shadow-sm">Truffle Suite</span>
+          <span class="skill-chip px-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#334155] shadow-sm">Selenium</span>
+          <span class="skill-chip px-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#334155] shadow-sm">JMeter</span>
+          <span class="skill-chip px-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#334155] shadow-sm">TestNG</span>
+        </div>
+      </div>
+
+      <div data-aos="fade-up" data-aos-delay="160">
+        <p class="text-[11px] font-bold text-[#94A3B8] uppercase tracking-widest mb-3">Tools & Platforms</p>
+        <div class="flex flex-wrap gap-2.5">
+          <span class="skill-chip px-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#334155] shadow-sm">Git & GitHub</span>
+          <span class="skill-chip px-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#334155] shadow-sm">Figma</span>
+          <span class="skill-chip px-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#334155] shadow-sm">Firebase</span>
+          <span class="skill-chip px-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#334155] shadow-sm">JIRA</span>
+          <span class="skill-chip px-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#334155] shadow-sm">Wireshark</span>
+          <span class="skill-chip px-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#334155] shadow-sm">Nmap</span>
+          <span class="skill-chip px-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-sm font-medium text-[#334155] shadow-sm">Metasploit</span>
+        </div>
+      </div>
+
+      <div data-aos="fade-up" data-aos-delay="240">
+        <p class="text-[11px] font-bold text-[#94A3B8] uppercase tracking-widest mb-3">Domains & Concepts</p>
+        <div class="flex flex-wrap gap-2.5">
+          <span class="skill-chip px-4 py-2 bg-deepBlue/10 border border-deepBlue/20 rounded-xl text-sm font-medium text-deepBlue shadow-sm">QA Automation</span>
+          <span class="skill-chip px-4 py-2 bg-deepBlue/10 border border-deepBlue/20 rounded-xl text-sm font-medium text-deepBlue shadow-sm">Blockchain</span>
+          <span class="skill-chip px-4 py-2 bg-deepBlue/10 border border-deepBlue/20 rounded-xl text-sm font-medium text-deepBlue shadow-sm">IoT Security</span>
+          <span class="skill-chip px-4 py-2 bg-deepBlue/10 border border-deepBlue/20 rounded-xl text-sm font-medium text-deepBlue shadow-sm">Agile / Scrum</span>
+          <span class="skill-chip px-4 py-2 bg-deepBlue/10 border border-deepBlue/20 rounded-xl text-sm font-medium text-deepBlue shadow-sm">Product Design</span>
+          <span class="skill-chip px-4 py-2 bg-deepBlue/10 border border-deepBlue/20 rounded-xl text-sm font-medium text-deepBlue shadow-sm">Engineering Management</span>
+          <span class="skill-chip px-4 py-2 bg-deepBlue/10 border border-deepBlue/20 rounded-xl text-sm font-medium text-deepBlue shadow-sm">Big Data Analytics</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────
+     EXPERIENCE
+──────────────────────────────────────────── -->
+<section id="experience" class="py-24 bg-white">
+  <div class="max-w-3xl mx-auto px-6">
+
+    <div class="text-center mb-16" data-aos="fade-down">
+      <div class="section-pill inline-flex"><span></span>Career Journey</div>
+      <h2 class="text-4xl font-bold font-serif text-[#0F172A]">Experience</h2>
+    </div>
+
+    <!-- Timeline -->
+    <div class="relative pl-8 border-l-2 border-gradient space-y-12"
+         style="border-image:linear-gradient(to bottom,#3B7B9A,#70AFCE,#B8D7E0) 1">
+
+      <!-- E-Forte -->
+      <div class="relative" data-aos="fade-up">
+        <div class="exp-dot bg-deepBlue"></div>
+        <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-6 hover:border-midBlue transition-colors">
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-4">
+            <div>
+              <h3 class="text-xl font-bold font-serif text-[#0F172A]">Founder & Instructor</h3>
+              <p class="text-deepBlue font-semibold text-sm mt-1">E-Forte Music Academy · Mumbai</p>
+            </div>
+            <span class="text-xs font-semibold text-[#64748B] bg-white border border-[#E2E8F0] rounded-lg px-3 py-1.5 whitespace-nowrap self-start">
+              Jul 2023 – Jul 2025
+            </span>
+          </div>
+          <ul class="space-y-2 text-[#475569] text-sm">
+            <li class="flex gap-2"><span class="text-deepBlue mt-0.5 flex-shrink-0">▸</span>Built a structured keyboard program aligned with Trinity College London</li>
+            <li class="flex gap-2"><span class="text-deepBlue mt-0.5 flex-shrink-0">▸</span>Mentored 50+ students with personalized lesson plans</li>
+            <li class="flex gap-2"><span class="text-deepBlue mt-0.5 flex-shrink-0">▸</span>Increased student retention by 40% with interactive teaching methods</li>
+          </ul>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="text-[11px] px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B]">Music Education</span>
+            <span class="text-[11px] px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B]">Curriculum Design</span>
+            <span class="text-[11px] px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B]">Entrepreneurship</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jio -->
+      <div class="relative" data-aos="fade-up" data-aos-delay="80">
+        <div class="exp-dot bg-deepBlue"></div>
+        <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-6 hover:border-midBlue transition-colors">
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-4">
+            <div>
+              <h3 class="text-xl font-bold font-serif text-[#0F172A]">QA Automation Engineer</h3>
+              <p class="text-deepBlue font-semibold text-sm mt-1">Jio Platforms Ltd. · Mumbai</p>
+            </div>
+            <span class="text-xs font-semibold text-[#64748B] bg-white border border-[#E2E8F0] rounded-lg px-3 py-1.5 whitespace-nowrap self-start">
+              Oct 2023 – Apr 2025
+            </span>
+          </div>
+          <ul class="space-y-2 text-[#475569] text-sm">
+            <li class="flex gap-2"><span class="text-deepBlue mt-0.5 flex-shrink-0">▸</span>Led JioMeet automation, significantly boosting test coverage and execution speed</li>
+            <li class="flex gap-2"><span class="text-deepBlue mt-0.5 flex-shrink-0">▸</span>Proposed an AI-powered chatbot to improve end-user support experience</li>
+            <li class="flex gap-2"><span class="text-deepBlue mt-0.5 flex-shrink-0">▸</span>Mentored junior QA engineers, improving team efficiency by 30%</li>
+          </ul>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="text-[11px] px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B]">Selenium</span>
+            <span class="text-[11px] px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B]">JMeter</span>
+            <span class="text-[11px] px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B]">QA Automation</span>
+            <span class="text-[11px] px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B]">AI / Chatbot</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edvansity -->
+      <div class="relative" data-aos="fade-up" data-aos-delay="160">
+        <div class="exp-dot bg-midBlue"></div>
+        <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-6 hover:border-midBlue transition-colors">
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-4">
+            <div>
+              <h3 class="text-xl font-bold font-serif text-[#0F172A]">Web Development Faculty</h3>
+              <p class="text-deepBlue font-semibold text-sm mt-1">Edvansity · Mumbai</p>
+            </div>
+            <span class="text-xs font-semibold text-[#64748B] bg-white border border-[#E2E8F0] rounded-lg px-3 py-1.5 whitespace-nowrap self-start">
+              Jun 2021 – Sep 2022
+            </span>
+          </div>
+          <ul class="space-y-2 text-[#475569] text-sm">
+            <li class="flex gap-2"><span class="text-deepBlue mt-0.5 flex-shrink-0">▸</span>Designed curriculum for 500+ learners covering HTML, CSS, and JavaScript</li>
+            <li class="flex gap-2"><span class="text-deepBlue mt-0.5 flex-shrink-0">▸</span>Led project-based workshops achieving a 30% higher course completion rate</li>
+            <li class="flex gap-2"><span class="text-deepBlue mt-0.5 flex-shrink-0">▸</span>Promoted to Department Head for driving outstanding student growth</li>
+          </ul>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="text-[11px] px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B]">HTML / CSS</span>
+            <span class="text-[11px] px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B]">JavaScript</span>
+            <span class="text-[11px] px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B]">Education</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TSF Intern -->
+      <div class="relative" data-aos="fade-up" data-aos-delay="240">
+        <div class="exp-dot bg-lightBlue"></div>
+        <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-6 hover:border-midBlue transition-colors">
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-4">
+            <div>
+              <h3 class="text-xl font-bold font-serif text-[#0F172A]">Software Engineer Intern</h3>
+              <p class="text-deepBlue font-semibold text-sm mt-1">The Sparks Foundation · Mumbai</p>
+            </div>
+            <span class="text-xs font-semibold text-[#64748B] bg-white border border-[#E2E8F0] rounded-lg px-3 py-1.5 whitespace-nowrap self-start">
+              Sep 2020 – Aug 2021
+            </span>
+          </div>
+          <ul class="space-y-2 text-[#475569] text-sm">
+            <li class="flex gap-2"><span class="text-deepBlue mt-0.5 flex-shrink-0">▸</span>Built a digital banking system focused on speed and usability</li>
+            <li class="flex gap-2"><span class="text-deepBlue mt-0.5 flex-shrink-0">▸</span>Streamlined backend flows and mapped detailed user journeys</li>
+          </ul>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="text-[11px] px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B]">Full Stack</span>
+            <span class="text-[11px] px-2.5 py-1 bg-white border border-[#E2E8F0] rounded-lg text-[#64748B]">UX Design</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────
+     PROJECTS
+──────────────────────────────────────────── -->
+<section id="projects" class="py-24 bg-[#F8FAFC]">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="text-center mb-14" data-aos="fade-down">
+      <div class="section-pill inline-flex"><span></span>What I've Built</div>
+      <h2 class="text-4xl font-bold font-serif text-[#0F172A]">Projects</h2>
+      <p class="text-[#64748B] mt-3 max-w-xl mx-auto text-[15px]">
+        A selection of work spanning blockchain, cybersecurity, and product design.
+      </p>
+    </div>
+
+    <div id="projects-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────
+     LEADERSHIP
+──────────────────────────────────────────── -->
+<section id="leadership" class="py-24 bg-navy">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <div class="text-center mb-14" data-aos="fade-down">
+      <div class="inline-flex items-center gap-2 bg-white/10 border border-white/15 rounded-full px-4 py-1.5 mb-4 text-white/70 text-sm font-semibold">
+        <span class="w-1.5 h-1.5 bg-midBlue rounded-full"></span>
+        Roles & Impact
+      </div>
+      <h2 class="text-4xl font-bold font-serif text-white">Leadership</h2>
+    </div>
+
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+      <div data-aos="fade-up" class="lead-card bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/8">
+        <span class="inline-block text-xs font-semibold text-midBlue bg-midBlue/10 px-3 py-1 rounded-full mb-3">Aug 2025 – Present</span>
+        <h3 class="text-lg font-bold font-serif text-white mb-1">Student Ambassador</h3>
+        <p class="text-midBlue text-sm font-medium mb-4">MEM · Cornell University</p>
+        <ul class="space-y-2">
+          <li class="flex gap-2 text-white/55 text-sm"><span class="text-midBlue flex-shrink-0 mt-0.5">▸</span>Represent Engineering Management at university events</li>
+          <li class="flex gap-2 text-white/55 text-sm"><span class="text-midBlue flex-shrink-0 mt-0.5">▸</span>Panelist at monthly virtual information sessions</li>
+          <li class="flex gap-2 text-white/55 text-sm"><span class="text-midBlue flex-shrink-0 mt-0.5">▸</span>Mentor for incoming students</li>
+        </ul>
+      </div>
+
+      <div data-aos="fade-up" data-aos-delay="60" class="lead-card bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/8">
+        <span class="inline-block text-xs font-semibold text-midBlue bg-midBlue/10 px-3 py-1 rounded-full mb-3">Jan 2022 – Jan 2023</span>
+        <h3 class="text-lg font-bold font-serif text-white mb-1">President</h3>
+        <p class="text-midBlue text-sm font-medium mb-4">FCRIT RHYTHM · Music Club</p>
+        <ul class="space-y-2">
+          <li class="flex gap-2 text-white/55 text-sm"><span class="text-midBlue flex-shrink-0 mt-0.5">▸</span>Led club growth and managed all musical events</li>
+          <li class="flex gap-2 text-white/55 text-sm"><span class="text-midBlue flex-shrink-0 mt-0.5">▸</span>Orchestrated first full-scale performance initiative</li>
+          <li class="flex gap-2 text-white/55 text-sm"><span class="text-midBlue flex-shrink-0 mt-0.5">▸</span>Scaled to largest music club on campus</li>
+        </ul>
+      </div>
+
+      <div data-aos="fade-up" data-aos-delay="120" class="lead-card bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/8">
+        <span class="inline-block text-xs font-semibold text-midBlue bg-midBlue/10 px-3 py-1 rounded-full mb-3">Jan 2020 – Jan 2022</span>
+        <h3 class="text-lg font-bold font-serif text-white mb-1">Event Head</h3>
+        <p class="text-midBlue text-sm font-medium mb-4">FCRIT RHYTHM · Music Club</p>
+        <ul class="space-y-2">
+          <li class="flex gap-2 text-white/55 text-sm"><span class="text-midBlue flex-shrink-0 mt-0.5">▸</span>Oversaw planning and execution of music events</li>
+          <li class="flex gap-2 text-white/55 text-sm"><span class="text-midBlue flex-shrink-0 mt-0.5">▸</span>Coordinated with artists, faculty, and logistics teams</li>
+        </ul>
+      </div>
+
+      <div data-aos="fade-up" data-aos-delay="180" class="lead-card bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/8">
+        <span class="inline-block text-xs font-semibold text-midBlue bg-midBlue/10 px-3 py-1 rounded-full mb-3">Jun 2021 – May 2022</span>
+        <h3 class="text-lg font-bold font-serif text-white mb-1">Head of Public Relations</h3>
+        <p class="text-midBlue text-sm font-medium mb-4">CSI Council · FCRIT</p>
+        <ul class="space-y-2">
+          <li class="flex gap-2 text-white/55 text-sm"><span class="text-midBlue flex-shrink-0 mt-0.5">▸</span>Promoted CSI activities and boosted student engagement</li>
+          <li class="flex gap-2 text-white/55 text-sm"><span class="text-midBlue flex-shrink-0 mt-0.5">▸</span>Represented club at inter-college tech fests</li>
+        </ul>
+      </div>
+
+      <div data-aos="fade-up" data-aos-delay="240" class="lead-card bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/8">
+        <span class="inline-block text-xs font-semibold text-midBlue bg-midBlue/10 px-3 py-1 rounded-full mb-3">Feb 2020 – Dec 2020</span>
+        <h3 class="text-lg font-bold font-serif text-white mb-1">Communications & Marketing</h3>
+        <p class="text-midBlue text-sm font-medium mb-4">TEDxFCRIT</p>
+        <ul class="space-y-2">
+          <li class="flex gap-2 text-white/55 text-sm"><span class="text-midBlue flex-shrink-0 mt-0.5">▸</span>Handled event branding, outreach, and speaker communication</li>
+          <li class="flex gap-2 text-white/55 text-sm"><span class="text-midBlue flex-shrink-0 mt-0.5">▸</span>Contributed to TEDx event with wide student participation</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────
+     CONTACT
+──────────────────────────────────────────── -->
+<section id="contact" class="py-24 bg-white">
+  <div class="max-w-4xl mx-auto px-6">
+
+    <div class="text-center mb-14" data-aos="fade-down">
+      <div class="section-pill inline-flex"><span></span>Get in Touch</div>
+      <h2 class="text-4xl font-bold font-serif text-[#0F172A]">Let's Connect</h2>
+      <p class="text-[#64748B] mt-3 max-w-md mx-auto text-[15px]">
+        Whether you have a project in mind, want to collaborate, or just want to say hi - I'm always happy to connect.
+      </p>
+    </div>
+
+    <!-- Contact cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-14">
+      <a href="https://www.linkedin.com/in/elishagras/" target="_blank"
+         class="contact-card group flex flex-col items-center bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-8 text-center"
+         data-aos="fade-up">
+        <div class="w-14 h-14 flex items-center justify-center bg-white rounded-2xl shadow-sm group-hover:shadow-md mb-4 transition-shadow">
+          <svg class="w-7 h-7 text-deepBlue" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M4.98 3.5C4.98 4.6 4.1 5.5 2.98 5.5 1.87 5.5 1 4.6 1 3.5S1.87 1.5 2.98 1.5C4.1 1.5 4.98 2.4 4.98 3.5ZM.5 8.5H5.5V24H.5V8.5ZM8.5 8.5H13.2V10.9H13.3C13.9 9.8 15.7 8.5 18.1 8.5 22 8.5 24 11.1 24 16.1V24H19V16.8C19 14.1 18.9 11 15 11 11.2 11 11 13.8 11 16.6V24H6V8.5H8.5Z"/>
+          </svg>
+        </div>
+        <h3 class="font-bold text-[#0F172A] mb-1">LinkedIn</h3>
+        <p class="text-[#64748B] text-sm">Connect with me</p>
+      </a>
+
+      <a href="mailto:elisha.h.gras@gmail.com"
+         class="contact-card group flex flex-col items-center bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-8 text-center"
+         data-aos="fade-up" data-aos-delay="100">
+        <div class="w-14 h-14 flex items-center justify-center bg-white rounded-2xl shadow-sm group-hover:shadow-md mb-4 transition-shadow">
+          <svg class="w-7 h-7 text-deepBlue" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 6L12 11L4 6H20ZM4 18V8L12 13L20 8V18H4Z"/>
+          </svg>
+        </div>
+        <h3 class="font-bold text-[#0F172A] mb-1">Email</h3>
+        <p class="text-[#64748B] text-sm">elisha.h.gras@gmail.com</p>
+      </a>
+
+      <a href="assets/files/resume.pdf" target="_blank"
+         class="contact-card group flex flex-col items-center bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-8 text-center"
+         data-aos="fade-up" data-aos-delay="200">
+        <div class="w-14 h-14 flex items-center justify-center bg-white rounded-2xl shadow-sm group-hover:shadow-md mb-4 transition-shadow">
+          <svg class="w-7 h-7 text-deepBlue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+        </div>
+        <h3 class="font-bold text-[#0F172A] mb-1">Resume</h3>
+        <p class="text-[#64748B] text-sm">Download PDF</p>
+      </a>
+    </div>
+
+    <!-- Contact form -->
+    <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-3xl p-8 lg:p-10" data-aos="fade-up">
+      <h3 class="text-2xl font-bold font-serif text-[#0F172A] mb-6 text-center">Send me a message</h3>
+      <form onsubmit="submitForm(event)" class="space-y-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-sm font-medium text-[#475569] mb-2">Name</label>
+            <input type="text" name="from_name" required placeholder="Your name"
+                   class="w-full px-4 py-3 bg-white border border-[#E2E8F0] rounded-xl text-[#0F172A] placeholder-[#94A3B8] transition text-sm">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-[#475569] mb-2">Email</label>
+            <input type="email" name="from_email" required placeholder="your@email.com"
+                   class="w-full px-4 py-3 bg-white border border-[#E2E8F0] rounded-xl text-[#0F172A] placeholder-[#94A3B8] transition text-sm">
+          </div>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-[#475569] mb-2">Message</label>
+          <textarea name="message" rows="5" required placeholder="Tell me about your project or opportunity..."
+                    class="w-full px-4 py-3 bg-white border border-[#E2E8F0] rounded-xl text-[#0F172A] placeholder-[#94A3B8] transition resize-none text-sm"></textarea>
+        </div>
+        <button type="submit" id="submit-btn"
+                class="w-full py-3.5 bg-deepBlue text-white font-semibold rounded-xl hover:bg-midBlue transition-colors shadow-md hover:shadow-deepBlue/30 text-sm">
+          Send Message →
+        </button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ─────────────────────────────────────────
+     FOOTER
+──────────────────────────────────────────── -->
+<footer class="bg-navy py-12">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div>
+        <p class="text-2xl font-bold font-serif text-white">EG</p>
+        <p class="text-white/35 text-sm mt-1">Elisha Gras · Portfolio</p>
+      </div>
+      <div class="flex gap-8">
+        <a href="#about"      class="text-white/45 text-sm hover:text-white transition">About</a>
+        <a href="#projects"   class="text-white/45 text-sm hover:text-white transition">Projects</a>
+        <a href="#leadership" class="text-white/45 text-sm hover:text-white transition">Leadership</a>
+        <a href="#contact"    class="text-white/45 text-sm hover:text-white transition">Contact</a>
+      </div>
+      <div class="flex gap-3">
+        <a href="https://www.linkedin.com/in/elishagras/" target="_blank"
+           class="w-9 h-9 flex items-center justify-center bg-white/10 rounded-xl text-white/55 hover:text-white hover:bg-white/20 transition" aria-label="LinkedIn">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M4.98 3.5C4.98 4.6 4.1 5.5 2.98 5.5 1.87 5.5 1 4.6 1 3.5S1.87 1.5 2.98 1.5C4.1 1.5 4.98 2.4 4.98 3.5ZM.5 8.5H5.5V24H.5V8.5ZM8.5 8.5H13.2V10.9H13.3C13.9 9.8 15.7 8.5 18.1 8.5 22 8.5 24 11.1 24 16.1V24H19V16.8C19 14.1 18.9 11 15 11 11.2 11 11 13.8 11 16.6V24H6V8.5H8.5Z"/>
+          </svg>
+        </a>
+        <a href="mailto:elisha.h.gras@gmail.com"
+           class="w-9 h-9 flex items-center justify-center bg-white/10 rounded-xl text-white/55 hover:text-white hover:bg-white/20 transition" aria-label="Email">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 6L12 11L4 6H20ZM4 18V8L12 13L20 8V18H4Z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="mt-8 pt-6 border-t border-white/10 text-center">
+      <p class="text-white/25 text-sm">© 2025 Elisha Gras · Built with care.</p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ─────────────────────────────────────────
+     SCRIPTS
+──────────────────────────────────────────── -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+<script>
+  /* AOS */
+  AOS.init({ duration: 800, once: true, offset: 60 });
+
+  /* Typed.js */
+  new Typed('#typed-text', {
+    strings: ['Engineer', 'Educator', 'Creator', 'Problem Solver'],
+    typeSpeed: 75,
+    backSpeed: 45,
+    backDelay: 1800,
+    loop: true
+  });
+
+  /* EmailJS */
+  emailjs.init('1CjAL03hTMIn3bWqo');
+  function submitForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Sending…'; btn.disabled = true;
+    emailjs.sendForm('service_7411oxa', 'template_r55x476', e.target)
+      .then(() => {
+        btn.textContent = 'Message Sent ✓';
+        btn.classList.replace('bg-deepBlue','bg-green-600');
+        e.target.reset();
+        setTimeout(() => { btn.textContent='Send Message →'; btn.classList.replace('bg-green-600','bg-deepBlue'); btn.disabled=false; }, 3500);
+      })
+      .catch(err => {
+        btn.textContent = 'Error - Try Again';
+        btn.classList.replace('bg-deepBlue','bg-red-500');
+        setTimeout(() => { btn.textContent='Send Message →'; btn.classList.replace('bg-red-500','bg-deepBlue'); btn.disabled=false; }, 3500);
+        console.error(err);
+      });
+  }
+
+  /* Navbar scroll */
+  const navbar = document.getElementById('navbar');
+  const heroEl = document.getElementById('hero');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > heroEl.offsetHeight * 0.45);
+  }, { passive: true });
+
+  /* Scroll progress */
+  const pb = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    pb.style.width = (window.scrollY / (document.documentElement.scrollHeight - innerHeight) * 100) + '%';
+  }, { passive: true });
+
+  /* Mobile menu */
+  const menuBtn    = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+
+  /* Projects */
+  fetch('assets/files/projects.json')
+    .then(r => r.json())
+    .then(data => {
+      const container = document.getElementById('projects-container');
+      data.forEach((p, i) => {
+        const card = document.createElement('div');
+        card.className = 'proj-card bg-white rounded-3xl overflow-hidden border border-[#E2E8F0] shadow-sm';
+        card.setAttribute('data-aos', 'fade-up');
+        card.setAttribute('data-aos-delay', String(i * 100));
+
+        const tagsHTML = (p.tags || [])
+          .map(t => `<span class="text-[11px] px-2.5 py-1 bg-[#F1F5F9] rounded-lg text-[#64748B] font-medium">${t}</span>`)
+          .join('');
+
+        card.innerHTML = `
+          <div class="overflow-hidden h-52">
+            <img src="${p.image}" alt="${p.title}" class="proj-thumb w-full h-full object-cover object-top" onerror="this.parentElement.innerHTML='<div class=\'w-full h-full bg-gradient-to-br from-[#3B7B9A] to-[#0D1B2A] flex items-center justify-center\'><span class=\'text-white/40 text-sm\'>No Image</span></div>'"  >
+          </div>
+          <div class="p-6">
+            ${p.category ? `<span class="inline-block text-[11px] font-bold text-deepBlue bg-blueLight px-2.5 py-1 rounded-full mb-3">${p.category}</span>` : ''}
+            <h3 class="text-[1.05rem] font-bold font-serif text-[#0F172A] mb-2 leading-snug">${p.title}</h3>
+            <p class="text-[#475569] text-sm leading-relaxed mb-4">${p.description}</p>
+            ${p.disclaimer ? `<p class="text-[11px] italic text-[#94A3B8] mb-4">${p.disclaimer}</p>` : ''}
+            ${tagsHTML ? `<div class="flex flex-wrap gap-1.5 mb-5">${tagsHTML}</div>` : ''}
+            <a href="${p.link}" class="inline-flex items-center gap-1 text-deepBlue text-sm font-semibold hover:text-midBlue transition-colors group">
+              View Case Study <span class="inline-block group-hover:translate-x-1 transition-transform">→</span>
+            </a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+      AOS.refresh();
+    });
+</script>
+</body>
+</html>

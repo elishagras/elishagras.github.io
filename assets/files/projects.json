@@ -1,0 +1,35 @@
+[
+  {
+    "title": "PainSense.ai - Animal Health Hackathon",
+    "description": "An AI platform that uses computer vision and a two-stream deep neural network to objectively detect and score pain in dogs from short videos - built at Cornell's Animal Health Hackathon.",
+    "category": "AI / HealthTech",
+    "image": "assets/images/painsense-dashboard.png",
+    "link": "project-painsense.html",
+    "tags": ["Computer Vision", "CNN", "LLM", "Product Strategy"]
+  },
+  {
+    "title": "Melodease – Music Practice Tracking App",
+    "description": "An adaptive music education platform blending personalized lessons, gamification, and AI-powered feedback to make practice consistent and engaging. Designed for Trinity College London curriculum.",
+    "disclaimer": "Personal learning & design project.",
+    "category": "Product Design",
+    "image": "assets/images/melodease.png",
+    "link": "project-melodease.html",
+    "tags": ["Flutter", "Firebase", "Figma", "UX Research"]
+  },
+  {
+    "title": "Decentralized Framework for Content Creators",
+    "description": "A blockchain ecosystem empowering creators with tokenized analytics, DAO-based governance, and a recommendation engine powered by big data clustering.",
+    "category": "Blockchain",
+    "image": "assets/images/daoproject.png",
+    "link": "project-blockchain.html",
+    "tags": ["Solidity", "React.js", "Truffle Suite", "DAO"]
+  },
+  {
+    "title": "Demonstration of IoT Attacks",
+    "description": "A hands-on security project that simulates real-world IoT vulnerabilities - including port scanning, brute force, MITM, and phishing - with evaluated countermeasures.",
+    "category": "Cybersecurity",
+    "image": "assets/images/iot.jpg",
+    "link": "project-iot.html",
+    "tags": ["Metasploit", "Wireshark", "Nmap", "Raspberry Pi"]
+  }
+]

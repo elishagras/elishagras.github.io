@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decentralized Framework for Content Creators | Elisha Gras</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary:#3B7B9A; --accent:#70AFCE; --navy:#0D1B2A; }
+    body { font-family:'Inter',sans-serif; background:#FFFFFF; color:#0f172a; -webkit-font-smoothing:antialiased; }
+    h1,h2,h3 { font-family:'Merriweather',serif; }
+    .timeline-item { opacity:0; transform:translateY(40px); transition:all .8s cubic-bezier(.2,.9,.3,1); }
+    .timeline-item.show { opacity:1; transform:translateY(0); }
+    .gradient-title { background:linear-gradient(90deg,#3B7B9A,#70AFCE); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .card { background:#fff; border-radius:1rem; box-shadow:0 4px 24px rgba(15,23,42,.06); border:1px solid #E2E8F0; }
+    img.hover-effect,video.hover-effect { transition:transform .3s ease,box-shadow .3s ease; border-radius:1rem; }
+    img.hover-effect:hover,video.hover-effect:hover { transform:scale(1.04); box-shadow:0 16px 32px rgba(0,0,0,.15); }
+    video { box-shadow:0 8px 20px rgba(0,0,0,.1); border-radius:1rem; }
+    .tag { display:inline-block; font-size:.7rem; font-weight:600; padding:3px 10px; border-radius:999px; background:#EBF4FA; color:#3B7B9A; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="bg-[#0D1B2A] text-white shadow-lg">
+    <div class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
+      <div>
+        <a href="index.html" class="text-white/50 text-sm hover:text-white transition mb-1 inline-flex items-center gap-1">
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+          Back to Portfolio
+        </a>
+        <h1 class="text-xl sm:text-2xl font-serif font-bold text-white mt-0.5">Decentralized Framework for Content Creators</h1>
+      </div>
+      <a href="index.html" class="hidden sm:block text-2xl font-bold font-serif text-white/80 hover:text-white transition">EG</a>
+    </div>
+    <!-- Category pills -->
+    <div class="max-w-6xl mx-auto px-6 pb-4 flex flex-wrap gap-2">
+      <span class="tag">Blockchain</span>
+      <span class="tag">DAO</span>
+      <span class="tag">React.js</span>
+      <span class="tag">Solidity</span>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto p-6 lg:grid lg:grid-cols-4 lg:gap-12 space-y-12 lg:space-y-0">
+
+    <!-- Sidebar -->
+    <aside class="hidden lg:block lg:col-span-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-6 sticky top-24 space-y-4">
+      <h2 class="text-xl font-bold font-serif text-[#3B7B9A]">Project Details</h2>
+      <ul class="text-[#475569] text-sm space-y-3">
+        <li><span class="font-semibold text-[#0F172A]">Role:</span> Lead Developer & Researcher</li>
+        <li><span class="font-semibold text-[#0F172A]">Duration:</span> 6 months</li>
+        <li><span class="font-semibold text-[#0F172A]">Team Size:</span> 3</li>
+        <li><span class="font-semibold text-[#0F172A]">Tools:</span> Ethereum, Solidity, Truffle, React.js, Big Data</li>
+        <li><span class="font-semibold text-[#0F172A]">Category:</span> Blockchain · Analytics · DAO</li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <section class="lg:col-span-3 space-y-12">
+
+      <!-- Hero -->
+      <section class="text-center bg-white p-8 rounded-2xl shadow-lg">
+        <h2 class="text-4xl font-bold mb-4 gradient-title">Case Study</h2>
+        <p class="text-lg max-w-3xl mx-auto">
+          A blockchain-based ecosystem empowering content creators through tokenized engagement, analytics-driven recommendations, and decentralized governance.
+        </p>
+      </section>
+
+      <!-- Timeline Sections -->
+      <div class="relative space-y-12">
+
+        <!-- Overview -->
+        <section class="timeline-item bg-white p-6 rounded-2xl shadow-lg">
+          <h2 class="text-2xl font-bold mb-2 gradient-title border-b-2 border-[#70AFCE] pb-2">Overview</h2>
+          <p>
+            This project explored how blockchain and big data analytics can empower digital content creators by offering tokenized engagement, recommendation systems, and micro-economy models. 
+            The system was designed to enhance creator visibility, strengthen community engagement, and introduce a transparent, decentralized ecosystem.
+          </p>
+        </section>
+
+        <!-- Problem Statement -->
+        <section class="timeline-item bg-white p-6 rounded-2xl shadow-lg">
+          <h2 class="text-2xl font-bold mb-2 gradient-title border-b-2 border-[#70AFCE] pb-2">Problem Statement</h2>
+          <ul class="list-disc list-inside text-gray-700 space-y-1">
+            <li>Existing platforms like YouTube fail to give creators direct ownership of their engagement data.</li>
+            <li>Recommendation systems often ignore Shorts, resulting in incomplete analytics.</li>
+            <li>Smart contracts used for tokenization lack proper rule integrity.</li>
+            <li>Fluctuating token value makes monetization unstable for creators.</li>
+          </ul>
+        </section>
+
+        <!-- Proposed Solution -->
+        <section class="timeline-item bg-white p-6 rounded-2xl shadow-lg">
+          <h2 class="text-2xl font-bold mb-2 gradient-title border-b-2 border-[#70AFCE] pb-2">Proposed Solution</h2>
+          <ul class="list-disc list-inside text-gray-700 space-y-1">
+            <li>Integrates comprehensive YouTube data (Shorts + long-form videos).</li>
+            <li>Big data clustering & classification to recommend creators based on engagement.</li>
+            <li>DAO-based governance for fair, transparent system operations.</li>
+            <li>Tokenization system allowing users to buy creator tokens for exclusive content and communities.</li>
+          </ul>
+        </section>
+
+        <!-- System Design -->
+        <section class="timeline-item bg-white p-6 rounded-2xl shadow-lg">
+          <h2 class="text-2xl font-bold mb-2 gradient-title border-b-2 border-[#70AFCE] pb-2">System Design</h2>
+          <p class="mb-4 text-gray-700">
+            The system consists of multiple layers ensuring seamless functionality:
+          </p>
+          <ul class="list-disc list-inside text-gray-700 mb-6 space-y-1">
+            <li><strong>User Layer:</strong> Fans purchase tokens to unlock access to creators’ content.</li>
+            <li><strong>Analytics Layer:</strong> Processes video data including views, likes, comments, and Shorts.</li>
+            <li><strong>Recommendation Engine:</strong> Categorizes creators based on engagement levels.</li>
+            <li><strong>Blockchain Layer:</strong> Smart contracts manage transactions, token distribution, and DAO governance.</li>
+          </ul>
+
+          <!-- Diagrams -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <h3 class="font-semibold mb-2 text-gray-800 text-lg text-center">Block Diagram</h3>
+              <img src="assets/images/blockdiagram.png" alt="Block Diagram" class="rounded-lg shadow hover-effect">
+            </div>
+            <div>
+              <h3 class="font-semibold mb-2 text-gray-800 text-lg text-center">Activity Diagram</h3>
+              <img src="assets/images/activitydiagram.png" alt="Activity Diagram" class="rounded-lg shadow hover-effect">
+            </div>
+            <div>
+              <h3 class="font-semibold mb-2 text-gray-800 text-lg text-center">Use Case Diagram</h3>
+              <img src="assets/images/usecasediagram.png" alt="Use Case Diagram" class="rounded-lg shadow hover-effect">
+            </div>
+          </div>
+        </section>
+
+        <!-- Demo Video -->
+        <section class="timeline-item bg-white p-6 rounded-2xl shadow-lg">
+          <h2 class="text-2xl font-bold mb-2 gradient-title border-b-2 border-[#70AFCE] pb-2">Demo Video</h2>
+          <video controls poster="assets/images/video-poster.png" class="w-full mt-4 hover-effect">
+            <source src="assets/videos/DECENTRALIZED FRAMEWORK FOR CONTENT CREATORS.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </section>
+
+        <!-- Outcome & Learnings -->
+        <section class="timeline-item bg-white p-6 rounded-2xl shadow-lg">
+          <h2 class="text-2xl font-bold mb-2 gradient-title border-b-2 border-[#70AFCE] pb-2">Outcome & Learnings</h2>
+          <ul class="list-disc list-inside text-gray-700 space-y-1">
+            <li>Successfully built a prototype demonstrating decentralized creator economies.</li>
+            <li>Gained strong experience in blockchain development and scalable recommendation systems.</li>
+            <li>Future improvements can address token stability and rule integrity challenges for production deployment.</li>
+          </ul>
+        </section>
+
+        <!-- Tech Stack -->
+        <section class="timeline-item bg-white p-6 rounded-2xl shadow-lg">
+          <h2 class="text-2xl font-bold mb-2 gradient-title border-b-2 border-[#70AFCE] pb-2">Tech Stack</h2>
+          <p class="text-gray-700">Ethereum, Solidity, Truffle Suite, React.js, Big Data Analytics, DAO-based Governance</p>
+        </section>
+
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="bg-[#0D1B2A] py-10 mt-12">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <a href="index.html"
+         class="inline-flex items-center gap-1.5 text-[#70AFCE] hover:text-white text-sm font-medium transition mb-4">
+        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Back to Portfolio
+      </a>
+      <p class="text-white/25 text-xs mt-2">© 2025 Elisha Gras</p>
+    </div>
+  </footer>
+
+  <script>
+    // Timeline animation
+    const items = document.querySelectorAll('.timeline-item');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) entry.target.classList.add('show');
+      });
+    }, { threshold: 0.1 });
+    items.forEach(item => observer.observe(item));
+  </script>
+
+</body>
+</html>
