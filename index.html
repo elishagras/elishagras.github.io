@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Elisha Gras | Portfolio</title>
-  <style>body{background:#0D1B2A;opacity:0;transition:opacity .15s}</style>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
@@ -195,7 +194,7 @@
   <div class="absolute top-2/3  left-8    w-52 h-52 bg-lightBlue/10 rounded-full blur-2xl float-c pointer-events-none"></div>
 
   <div class="max-w-6xl mx-auto px-6 w-full py-32 lg:py-0">
-    <div class="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20">
+    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
 
       <!-- ── Text ── -->
       <div class="flex-1 text-center lg:text-left" data-aos="fade-right" data-aos-duration="900">
@@ -247,7 +246,7 @@
       </div>
 
       <!-- ── Photo ── -->
-      <div class="flex-shrink-0" data-aos="fade-left" data-aos-duration="900" data-aos-delay="200">
+      <div class="hidden lg:block flex-shrink-0">
         <div class="relative">
           <!-- Spinning ring -->
           <div class="w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full photo-ring p-[3px] shadow-2xl shadow-deepBlue/30">
@@ -750,7 +749,6 @@
 <script>
   /* AOS */
   AOS.init({ duration: 800, once: true, offset: 60 });
-  document.body.style.opacity = '1';
 
   /* Typed.js */
   new Typed('#typed-text', {
